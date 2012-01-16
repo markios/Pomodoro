@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+    <script src="js/jquery-1.5.js"></script>
+	<script src="js/jquery.tmpl.min.js"></script>
+   	<script src="js/cufon-yui.js" type="text/javascript"></script>
+	<script src="js/cufon-replace.js" type="text/javascript"></script>
+	<script src="js/BauhausC_700.font.js" type="text/javascript"></script>
+	<script src="js/Bauhaus_Lt_BT_400.font.js" type="text/javascript"></script>
+	<script src="js/Bauhaus_Md_BT_400.font.js" type="text/javascript"></script>
+	<script src="js/underscore-min.js" type="text/javascript"></script>
+    <script src="js/backbone.js" type="text/javascript"></script>
+    <script src="js/backbone-localstorage.js" type="text/javascript"></script>
+    <script src="js/global.js" type="text/javascript"></script>
+    <script src="js/views/task.js" type="text/javascript"></script>
+    <script src="js/views/timer.js" type="text/javascript"></script>
+    <script src="js/views/home.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+	        var App = Backbone.Router.extend({
+			  routes: {
+			    "": "index"
+			  },
+			  index: function() {
+				 var view = new APP.home.view();
+				 view.render();
+			  }
+		});
+    	window.app = new App();
+		Backbone.history.start();
+    });
+    </script>
+   <link rel="stylesheet" type="text/css" href="css/style.css" />
+   <title>Mark Kellett</title>
+   </head>
+   <body>
+   <div class="main">
+   	  <div class="holder">
+   	      <div class="title"><h2>Pomodoro</h2></div>
+	   	  <div class="task-holder">
+	   	  	<input type="text" id="task" class="new-task">
+	   	  </div>
+	   	  <div class="timer-holder">
+	  		<div class="time"></div>
+	   	  </div>
+   	  </div>
+	</div>
+	</body>
+</html>
