@@ -65,10 +65,10 @@ _.extend(Store.prototype, {
 // Override `Backbone.sync` to use delegate to the model or collection's
 // *localStorage* property, which should be an instance of `Store`.
 Backbone.sync = function(method, model, options) {
-
+  
   var resp;
   var store = model.localStorage || model.collection.localStorage;
-
+  
   switch (method) {
     case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
     case "create":  resp = store.create(model);                            break;

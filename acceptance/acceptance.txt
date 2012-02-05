@@ -1,0 +1,34 @@
+
+TASKS
+
+as a task user
+	when load the page
+	I should be able to view my previous tasks
+
+as a task user
+	when I enter my task into the box
+	I should see my task displayed below
+
+as a task user 
+	when I click on the delete button for a task
+	I should see the task disappear
+
+as a task user
+	when I click on the complete checkbox
+	I should see my task displayed as complete
+
+
+
+TIMER
+
+as a task user 
+	when I click on the timer
+	I should see the time begin to descend towards zero
+
+as a task user
+	when I click on a timer which is counting down
+	I should see the timer stop
+
+as a task user 
+	when I double click on a timer
+	I should see the timer reset

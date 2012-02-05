@@ -1,28 +1,51 @@
 (function($, undefined){
 	var task = APP.namespace('APP.tasks');
 	
-	task.task = Backbone.Model.extend({
+	task.Todo = Backbone.Model.extend({
 		defaults: function() {
 	      return {
 	        done:  false
 	      };
 	    },
-	    // Toggle the `done` state of this todo item.
+	    // Toggle the `done` state of this Todos item.
 	    toggle: function() {
 	      this.save({done: !this.get("done")});
 	    }
 	});
 
-	task.taskCollection = Backbone.Collection.extend({
-		model : task.task,
-	    localStorage: new Store("todos"),
+	task.TodoCollection = Backbone.Collection.extend({
+		
+		model : task.Todo,
 	    
-	    parse: function(response) {
-	    	return response.posts;
+	    // store the Todos's
+	    localStorage : new Store("todos"),
+	    
+		// Filter down the list of all todo items that are finished.
+	    done: function() {
+	      return this.filter(function(todo){ return todo.get('done'); });
+	    },
+
+	    // Filter down the list to only todo items that are still not finished.
+	    remaining: function() {
+	      return this.without.apply(this, this.done());
+	    },
+
+	    // We keep the Todos in sequential order, despite being saved by unordered
+	    // GUID in the database. This generates the next order number for new items.
+	    nextOrder: function() {
+	      if (!this.length) return 1;
+	      return this.last().get('order') + 1;
+	    },
+
+	    // Todos are sorted by their original insertion order.
+	    comparator: function(todo) {
+	      return todo.get('order');
 	    }
 	});
 
-	task.todo = APP.parentView.extend({
+	window.Todos = new task.TodoCollection;
+
+	task.TodoView = APP.parentView.extend({
 		tagName:  "li",
 
 	    // Cache the template function for a single item.
@@ -30,31 +53,31 @@
 
 	    // The DOM events specific to an item.
 	    events: {
-	      "click .check"              : "toggleDone",
+	      "click .check"               : "toggleDone",
 	      "dblclick div.todo-text"    : "edit",
 	      "click span.todo-destroy"   : "clear",
 	      "keypress .todo-input"      : "updateOnEnter"
 	    },
 
-	    // The TodoView listens for changes to its model, re-rendering.
+	    // The TodosView listens for changes to its model, re-rendering.
 	    initialize: function() {
 	      this.model.bind('change', this.render, this);
 	      this.model.bind('destroy', this.remove, this);
 	    },
 
-	    // Re-render the contents of the todo item.
+	    // Re-render the contents of the Todos item.
 	    render: function() {
-	      var todo = $(this._template).tmpl(this.model);
-		  $(this.el).html(todo);
+	      var rendered = $(this._template).tmpl(this.model);
+		  $(this.el).html(rendered);
 		  return this;
 	    },
 
 	    // To avoid XSS (not that it would be harmful in this particular app),
-	    // we use `jQuery.text` to set the contents of the todo item.
+	    // we use `jQuery.text` to set the contents of the Todos item.
 	    setText: function() {
 	      var text = this.model.get('text');
-	      this.$('.todo-text').text(text);
-	      this.input = this.$('.todo-input');
+	      this.$('.todos-text').text(text);
+	      this.input = this.$('.todos-input');
 	      this.input.bind('blur', _.bind(this.close, this)).val(text);
 	    },
 
@@ -69,7 +92,7 @@
 	      this.input.focus();
 	    },
 
-	    // Close the `"editing"` mode, saving changes to the todo.
+	    // Close the `"editing"` mode, saving changes to the Todos.
 	    close: function() {
 	      this.model.save({text: this.input.val()});
 	      $(this.el).removeClass("editing");
@@ -91,27 +114,35 @@
 	    }
 	});
 	
-	task.view = APP.parentView.extend({
+	task.View = APP.parentView.extend({
 		_template : '#taskTemplate',
 		initialize: function() {
-		   this._tasks = new task.taskCollection();
-		   this._tasks.bind('add', this.addOne, this);
-		   this._tasks.bind('all', this.render, this);
+		   
+		   Todos.bind('add', this.addOne, this);
+		   Todos.bind('all', this.render, this);
+		   Todos.bind('reset', this.addAll, this);
 		   this._input = $('#task', this.el);
 
-		   this._tasks.fetch();
+		   Todos.fetch();
 		},
         events : {
         	"keypress #task" : "addTask"
         },
-        addOne : function(todo) {
-        	var todoItem = new task.todo({model : todo});
+		// Add all items in the **Todos** collection at once.
+	    addAll: function() {
+	      Todos.each(this.addOne);
+	    },
+
+        addOne : function(item) {
+        	var todoItem = new task.TodoView({model : item});
         	this.$("#todo-list").append(todoItem.render().el);
         },
 		addTask : function (e) {
 			var text = this._input.val();
       		if (!text || e.keyCode != 13) return;
-      		this._tasks.create({name : text});
+      		
+      		Todos.create({name : text});
+      		
       		this._input.val('');
 		},
 		_showTasks : function(){
