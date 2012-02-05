@@ -53,7 +53,7 @@
 
 	    // The DOM events specific to an item.
 	    events: {
-	      "click .check"               : "toggleDone",
+	      "click .check"              : "toggleDone",
 	      "dblclick div.todo-text"    : "edit",
 	      "click span.todo-destroy"   : "clear",
 	      "keypress .todo-input"      : "updateOnEnter"
@@ -69,16 +69,17 @@
 	    render: function() {
 	      var rendered = $(this._template).tmpl(this.model);
 		  $(this.el).html(rendered);
+		  this.setEditArea();
 		  return this;
 	    },
 
 	    // To avoid XSS (not that it would be harmful in this particular app),
 	    // we use `jQuery.text` to set the contents of the Todos item.
-	    setText: function() {
-	      var text = this.model.get('text');
-	      this.$('.todos-text').text(text);
-	      this.input = this.$('.todos-input');
-	      this.input.bind('blur', _.bind(this.close, this)).val(text);
+	    setEditArea: function() {
+	      this.input = this.$('.todo-input');
+	      var self = this;
+	      this.input.bind('keypress', function(e){ self.updateOnEnter(e); });
+		  this.input.bind('blur', function(e){ self.close(); });
 	    },
 
 	    // Toggle the `"done"` state of the model.
@@ -94,7 +95,7 @@
 
 	    // Close the `"editing"` mode, saving changes to the Todos.
 	    close: function() {
-	      this.model.save({text: this.input.val()});
+	      this.model.save({name: this.input.val()});
 	      $(this.el).removeClass("editing");
 	    },
 
