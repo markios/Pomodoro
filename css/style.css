@@ -1,89 +1,18 @@
-body 					   { color:#FFF;background:url(../images/main-bk.png) no-repeat center top;font-family:Arial, Helvetica, sans-serif;}
 
-  ol, ul {
-  list-style: none;
-}
-a img {
-  border: none;
-}
-  .main            		   { width:1200px;margin:0 auto;height:100%;}
-  .holder				   { margin:0 auto 0 auto;width:800px;position:relative;}
-  .task-holder 			   { position:relative;top:50px;float:left;width:400px;height:400px;}
-  .task-holder .task	   { width:400px;height:40px;padding-left:5px;background-color:#1e1e1e;color:#9f11d3;font-size:14pt;font-family:Helvetica, Arial;
-	  						-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+  .task-holder 			                { }
+  .task-holder .task	              {  }
+   
+  .edit .todo-input                 { display:none;width:98%;}
+  .editing .display                 { display:none;}
+  .editing input                    { display: block !important;}
+  
+  .timer-holder			                {  }
+  .timer-holder .time               { font-size:80px;margin:0 0 20px 20px;cursor:pointer;}
+  .timer-holder .time:hover         { color : #9f11d3;}
+  .title				                    { color:#e5e1e1;position:relative;top:30px;}
+  .taskInput                        { width:100%;height:40px;font-size:18pt;color:#9f11d3;}
 
-  .task-holder .edit-task  {display:none;}
-  .timer-holder			   { position:relative;top:50px;float:left;width:400px;height:400px; }
-  .timer-holder .time      { margin:0 0 0 100px;font-size:70pt;text-shadow: 4px 4px 4px #000;color:#636363;cursor:pointer;}
-  .timer-holder .time:hover {color : #9f11d3;}
-  .title				   { color:#e5e1e1;position:relative;top:30px;}
-#todo-list {
-  margin-top: 10px;
-}
-  #todo-list li {
-    padding: 12px 20px 11px 0;
-    position: relative;
-    font-size: 24px;
-    line-height: 1.1em;
-    border-bottom: 1px solid #cccccc;
-  }
-    #todo-list li:after {
-      content: "\0020";
-      display: block;
-      height: 0;
-      clear: both;
-      overflow: hidden;
-      visibility: hidden;
-    }
-    #todo-list li.editing {
-      padding: 0;
-      border-bottom: 0;
-    }
-  #todo-list .editing .display,
-  #todo-list .edit {
-    display: none;
-  }
-    #todo-list .editing .edit {
-      display: block;
-    }
-    #todo-list .editing input {
-      width: 444px;
-      font-size: 24px;
-      font-family: inherit;
-      margin: 0;
-      line-height: 1.6em;
-      border: 0;
-      outline: none;
-      padding: 10px 7px 0px 27px;
-      border: 1px solid #999999;
-      -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-      -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-      -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-      box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-    }
-  #todo-list .check {
-    position: relative;
-    top: 9px;
-    margin: 0 10px 0 7px;
-    float: left;
-  }
-  .display .done{
-    text-decoration: line-through;
-    color: #777777;
-  }
-  .display .todo-destroy {
-    position: absolute;
-    right: 5px;
-    top: 14px;
-    display:none;
-    cursor: pointer;
-    width: 27px;
-    height: 27px;
-    background:url(../images/destroy.png);
-  }
-    #todo-list li:hover .display .todo-destroy {
-      display: block;
-    }
-    #todo-list .todo-destroy:hover {
-      background-position: 0 -20px;
-    }
+  #todo-list                        { font-size:14px;}
+  #todo-list .done                  { text-decoration:line-through;}
+  #todo-list .checkArea             { width:15px;}
+  #todo-list .removeArea            { width:15px;}

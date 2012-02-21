@@ -46,7 +46,7 @@
 	window.Todos = new task.TodoCollection;
 
 	task.TodoView = APP.parentView.extend({
-		tagName:  "li",
+		tagName:  "tr",
 
 	    // Cache the template function for a single item.
 	    _template : '#todoTemplate',
@@ -55,21 +55,24 @@
 	    events: {
 	      "click .check"              : "toggleDone",
 	      "dblclick div.todo-text"    : "edit",
-	      "click span.todo-destroy"   : "clear",
+	      "click .todo-destroy"   	  : "clear",
 	      "keypress .todo-input"      : "updateOnEnter"
 	    },
 
 	    // The TodosView listens for changes to its model, re-rendering.
 	    initialize: function() {
+
 	      this.model.bind('change', this.render, this);
 	      this.model.bind('destroy', this.remove, this);
 	    },
 
 	    // Re-render the contents of the Todos item.
 	    render: function() {
+	      this.el = $(this.el);
 	      var rendered = $(this._template).tmpl(this.model);
-		  $(this.el).html(rendered);
+		  this.el.html(rendered);
 		  this.setEditArea();
+		  this.displayArea =  this.el.find('.display');
 		  return this;
 	    },
 
@@ -84,19 +87,20 @@
 
 	    // Toggle the `"done"` state of the model.
 	    toggleDone: function() {
+	      this.displayArea.toggleClass('done');
 	      this.model.toggle();
 	    },
 
 	    // Switch this view into `"editing"` mode, displaying the input field.
 	    edit: function() {
-	      $(this.el).addClass("editing");
+	      this.el.addClass("editing");
 	      this.input.focus();
 	    },
 
 	    // Close the `"editing"` mode, saving changes to the Todos.
 	    close: function() {
 	      this.model.save({name: this.input.val()});
-	      $(this.el).removeClass("editing");
+	      this.el.removeClass("editing");
 	    },
 
 	    // If you hit `enter`, we're through editing the item.
@@ -106,7 +110,7 @@
 
 	    // Remove this view from the DOM.
 	    remove: function() {
-	      $(this.el).remove();
+	      this.el.remove();
 	    },
 
 	    // Remove the item, destroy the model.
@@ -131,12 +135,11 @@
         },
 		// Add all items in the **Todos** collection at once.
 	    addAll: function() {
-	      Todos.each(this.addOne);
+	        Todos.each(this.addOne);
 	    },
-
         addOne : function(item) {
         	var todoItem = new task.TodoView({model : item});
-        	this.$("#todo-list").append(todoItem.render().el);
+        	$("#todo-list").append(todoItem.render().el);
         },
 		addTask : function (e) {
 			var text = this._input.val();
@@ -146,13 +149,8 @@
       		
       		this._input.val('');
 		},
-		_showTasks : function(){
-			/*$(this._template).tmpl(this._tasks.models)
-							 .appendTo(this.el);*/
-			window.Cufon.replace('.tasks');
-		},
 		render : function(){
-			
+		   
 		}
 	});
 })(jQuery)

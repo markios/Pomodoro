@@ -50,8 +50,10 @@
         _start : function () {
         	var self = this;
         	this._timerStarted = true;
-        	this._timer = setInterval(function(){ 
-	        	self._countdown(); 
+        	self._countdown(); 
+            
+            this._timer = setInterval(function(){ 
+                self._countdown(); 
         	}, 1000);
 		},
         _stop : function () {
