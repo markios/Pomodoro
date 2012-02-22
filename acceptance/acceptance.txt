@@ -6,6 +6,10 @@ as a task user
 	I should be able to view my previous tasks
 
 as a task user
+	when I load the page
+	I should be able to see a count of tasks
+
+as a task user
 	when I enter my task into the box
 	I should see my task displayed below
 
@@ -32,3 +36,12 @@ as a task user
 as a task user 
 	when I double click on a timer
 	I should see the timer reset
+
+OPTIONS
+
+as a task user
+	when I enter the site I should see the menu option
+
+as a task user 
+	when I click on the menu button I should see a pop up window
+	I should then be able to change the timer value

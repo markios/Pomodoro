@@ -16,3 +16,5 @@
   #todo-list .done                  { text-decoration:line-through;}
   #todo-list .checkArea             { width:15px;}
   #todo-list .removeArea            { width:15px;}
+
+  .totalArea                        { margin: 25px 0 0 3px;}

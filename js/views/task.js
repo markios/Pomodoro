@@ -61,7 +61,6 @@
 
 	    // The TodosView listens for changes to its model, re-rendering.
 	    initialize: function() {
-
 	      this.model.bind('change', this.render, this);
 	      this.model.bind('destroy', this.remove, this);
 	    },
@@ -121,9 +120,14 @@
 	
 	task.View = APP.parentView.extend({
 		_template : '#taskTemplate',
+		_totalArea : $('#total'),
 		initialize: function() {
 		   
-		   Todos.bind('add', this.addOne, this);
+		   Todos.bind('add', function(){
+		   	  this.showTotal();
+		   	  this.addOne();
+		   }, this);
+
 		   Todos.bind('all', this.render, this);
 		   Todos.bind('reset', this.addAll, this);
 		   this._input = $('#task', this.el);
@@ -133,9 +137,13 @@
         events : {
         	"keypress #task" : "addTask"
         },
+        showTotal : function(){
+        	this._totalArea.html('Total : ' + Todos.length);
+        },
 		// Add all items in the **Todos** collection at once.
 	    addAll: function() {
-	        Todos.each(this.addOne);
+	    	this.showTotal();
+	    	Todos.each(this.addOne);
 	    },
         addOne : function(item) {
         	var todoItem = new task.TodoView({model : item});
