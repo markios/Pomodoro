@@ -19,6 +19,7 @@
       #statistics .data-row {margin-top:15px;}
       #statistics .data-row .data {padding:3px 5px 3px 5px;width:15px;display:inline-block;text-align:center;}
       #statistics .data-row .data-text {margin-left:10px;}
+      #statistics .header {display:inline-block;margin-left:10px;}
       .display       {-webkit-transition-property:padding-left;-webkit-transition-duration:500ms,500ms,500ms}
       .display:hover {padding-left:10px}
 
@@ -36,7 +37,7 @@
         }
       }
 
-      .data-row .data-pulse { 
+      .data-row .pulse { 
         -webkit-animation-name: pulse; 
         -webkit-animation-duration: 0.5s; 
         -webkit-animation-iteration-count: 2; 
@@ -114,8 +115,7 @@
         
         <div id="statistics" class="span3 well">
           <i class="icon-pencil"></i>
-          &nbsp;&nbsp;
-          <span><strong>Statistics</strong></span>
+          <span class="header"><strong>Statistics</strong></span>
           <div id="Pomodoro_today" class="data-row">
             <span class="label label-info data">5</span>
             <span class="data-text">Pomodoro's Completed Today</span>
@@ -125,15 +125,15 @@
             <span class="data-text">Total Pomodoro's</span>
           </div>
           <div class="data-row">
-            <span id="total_tasks" class="label label-default data"></span>
+            <span id="total_tasks" class="label label-default data pulse"></span>
             <span class="data-text">Total Tasks</span>
           </div>
           <div class="data-row">
-            <span id="inProgress_tasks" class="label label-warning data"></span>
+            <span id="inProgress_tasks" class="label label-warning data pulse"></span>
             <span class="data-text">In progress</span>
           </div>
           <div class="data-row">
-            <span id="complete_tasks" class="label label-success data"></span>
+            <span id="complete_tasks" class="label label-success data pulse"></span>
             <span class="data-text">Complete</span>
           </div>
         </div>
