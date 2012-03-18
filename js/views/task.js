@@ -86,6 +86,8 @@
 		   	  this.addOne(item);
 		   }, this);
 
+		   todos.bind('remove', this.showTotal, this);
+
 		   todos.bind('all', this.render, this);
 		   todos.bind('reset', this.addAll, this);
 		   this._input = $('#task', this.el);
