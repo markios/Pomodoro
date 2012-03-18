@@ -1,49 +1,6 @@
 (function($, undefined){
-	var task = APP.namespace('APP.tasks');
 	
-	task.Todo = Backbone.Model.extend({
-		defaults: function() {
-	      return {
-	        done:  false
-	      };
-	    },
-	    // Toggle the `done` state of this Todos item.
-	    toggle: function() {
-	      this.save({done: !this.get("done")});
-	    }
-	});
-
-	task.TodoCollection = Backbone.Collection.extend({
-		
-		model : task.Todo,
-	    
-	    // store the Todos's
-	    localStorage : new Store("todos"),
-	    
-		// Filter down the list of all todo items that are finished.
-	    done: function() {
-	      return this.filter(function(todo){ return todo.get('done'); });
-	    },
-
-	    // Filter down the list to only todo items that are still not finished.
-	    remaining: function() {
-	      return this.without.apply(this, this.done());
-	    },
-
-	    // We keep the Todos in sequential order, despite being saved by unordered
-	    // GUID in the database. This generates the next order number for new items.
-	    nextOrder: function() {
-	      if (!this.length) return 1;
-	      return this.last().get('order') + 1;
-	    },
-
-	    // Todos are sorted by their original insertion order.
-	    comparator: function(todo) {
-	      return todo.get('order');
-	    }
-	});
-
-	window.Todos = new task.TodoCollection;
+	var task = APP.namespace('APP.tasks');
 
 	task.TodoView = APP.parentView.extend({
 		tagName:  "tr",
@@ -79,9 +36,8 @@
 	    // we use `jQuery.text` to set the contents of the Todos item.
 	    setEditArea: function() {
 	      this.input = this.$('.todo-input');
-	      var self = this;
-	      this.input.bind('keypress', function(e){ self.updateOnEnter(e); });
-		  this.input.bind('blur', function(e){ self.close(); });
+	      this.input.bind('keypress', $.proxy(this.updateOnEnter, this));
+		  this.input.bind('blur', $.proxy(this.close, this));
 	    },
 
 	    // Toggle the `"done"` state of the model.
@@ -123,27 +79,27 @@
 		_totalArea : $('#total'),
 		initialize: function() {
 		   
-		   Todos.bind('add', function(){
+		   var todos = APP.models.Todos;
+
+		   todos.bind('add', function(item){
 		   	  this.showTotal();
-		   	  this.addOne();
+		   	  this.addOne(item);
 		   }, this);
 
-		   Todos.bind('all', this.render, this);
-		   Todos.bind('reset', this.addAll, this);
+		   todos.bind('all', this.render, this);
+		   todos.bind('reset', this.addAll, this);
 		   this._input = $('#task', this.el);
-
-		   Todos.fetch();
 		},
         events : {
         	"keypress #task" : "addTask"
         },
         showTotal : function(){
-        	this._totalArea.html('Total : ' + Todos.length);
+        	this._totalArea.html('Total : ' + APP.models.Todos.length);
         },
 		// Add all items in the **Todos** collection at once.
 	    addAll: function() {
 	    	this.showTotal();
-	    	Todos.each(this.addOne);
+	    	APP.models.Todos.each(this.addOne);
 	    },
         addOne : function(item) {
         	var todoItem = new task.TodoView({model : item});
@@ -153,13 +109,11 @@
 			var text = this._input.val();
       		if (!text || e.keyCode != 13) return;
       		
-      		Todos.create({name : text});
+      		APP.models.Todos.create({name : text});
       		
       		this._input.val('');
 		},
-		render : function(){
-		   
-		}
+		render : function(){ }
 	});
 })(jQuery)
 	
