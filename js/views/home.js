@@ -10,6 +10,7 @@
 	          statistics = new APP.statistics.view({ el : $('#statistics')});
 			
 			  APP.models.Todos.fetch();
+			  APP.models.Pomodoros.fetch();
 	          timer.render();
 	      	  statistics.render();
 

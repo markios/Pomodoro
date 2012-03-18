@@ -80,6 +80,7 @@
 		initialize: function() {
 		   
 		   var todos = APP.models.Todos;
+		   this._noTasksMessage = $('#js_noTasks');
 
 		   todos.bind('add', function(item){
 		   	  this.showTotal();
@@ -95,7 +96,18 @@
         events : {
         	"keypress #task" : "addTask"
         },
+        _showNoTasksInfo : function(){
+        	this._noTasksMessage.show('slow');
+        },
+        _hideNoTasksInfo : function(){
+        	this._noTasksMessage.hide();
+        },
         showTotal : function(){
+        	if(APP.models.Todos.length === 0){
+        		this._showNoTasksInfo();
+        	} else {
+        		this._hideNoTasksInfo();
+        	}
         	this._totalArea.html('Total : ' + APP.models.Todos.length);
         },
 		// Add all items in the **Todos** collection at once.
@@ -109,6 +121,7 @@
         },
 		addTask : function (e) {
 			var text = this._input.val();
+			text = text.charAt(0).toUpperCase() + text.slice(1);
       		if (!text || e.keyCode != 13) return;
       		
       		APP.models.Todos.create({name : text});
