@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Pomodoro</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -24,6 +24,7 @@
       .display:hover {padding-left:10px}
 
       .todo-text {cursor:pointer;}
+      .task_type {float:right;}
 
       input::-webkit-input-placeholder {
           color:    #DCDCDC !important;
@@ -82,7 +83,8 @@
                 <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <a href="#">Time</a>  
+                    <li>In progress</li>
+                    <li>Complete</li>
                 </ul>
               </li>
             </ul>
@@ -104,13 +106,14 @@
               <div class="totalArea">
                  <span id="total"></span>
                  <span class="offset3">
-                   <div class="btn-group">
-                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                   <div class="btn-group task_type">
+                     <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
                        All
                        <span class="caret"></span>
                      </a>
                      <ul class="dropdown-menu">
-                       <li>In Progress</li>
+                       <li><a href="#">In Progress</a></li>
+                       <li><a href="#">Complete</a></li>
                      </ul>
                    </div>
                  </span>

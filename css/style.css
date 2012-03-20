@@ -10,7 +10,7 @@
   .timer-holder .time               { font-size:80px;margin:0 0 20px 20px;cursor:pointer;}
   .timer-holder .time:hover         { color : #9f11d3;}
   .title				                    { color:#e5e1e1;position:relative;top:30px;}
-  .taskInput                        { width:100%;height:40px;font-size:18pt;color:#9f11d3;}
+  .taskInput                        { width:98%;height:40px;font-size:18pt;color:#9f11d3;}
 
   #todo-list                        { font-size:14px;}
   #todo-list .done                  { text-decoration:line-through;}
