@@ -4,6 +4,7 @@
 	timer.view = APP.parentView.extend({
 		initialize: function() {
 			this.el = $(this.el).find('.time');
+            this._min = APP.models.Settings.getSettings().timer_minutes;
 		},
         render : function(){
 			this._showTime();
@@ -12,9 +13,9 @@
 	        "click .time" : "activate",
     	    "dblclick .time" : "reset"
     	},
-    	_min : 25,
     	_sec : 0,
     	_timerStarted : false,
+
     	_countdown : function(){
 		    this._showTime();      
 		    
@@ -43,7 +44,7 @@
      		this.el.html(this._padTime(this._min) + ' : ' + this._padTime(this._sec));
   		},
         reset : function(){
-        	this._min = 25;
+        	this._min = APP.models.Settings.getSettings().timer_minutes;
         	this._sec = 0;
         	this._showTime();
         },

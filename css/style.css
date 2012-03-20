@@ -1,6 +1,49 @@
 
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      #statistics .data-row {margin-top:15px;}
+      #statistics .data-row .data {padding:3px 5px 3px 5px;width:15px;display:inline-block;text-align:center;}
+      #statistics .data-row .data-text {margin-left:10px;}
+      #statistics .header {display:inline-block;margin-left:20px;}
+      .display       {-webkit-transition-property:padding-left;-webkit-transition-duration:500ms,500ms,500ms}
+      .display:hover {padding-left:10px}
+
+      .todo-text {cursor:pointer;}
+      .task_type {float:right;}
+
+      input::-webkit-input-placeholder {
+          color:    #DCDCDC !important;
+      }
+      input:-moz-placeholder {
+          color:    #DCDCDC !important;
+      }
+
+      @-webkit-keyframes pulse {
+        from {
+          -webkit-transform: scale(1.0);
+        }
+        50% {
+          -webkit-transform: scale(1.2);
+        }
+        to { 
+          -webkit-transform: scale(1.0);
+        }
+      }
+
+      .data-row .pulse { 
+        -webkit-animation-name: pulse; 
+        -webkit-animation-duration: 0.5s; 
+        -webkit-animation-iteration-count: 2; 
+      }
+
+
+
   .task-holder 			                { }
   .task-holder .task	              {  }
+
+  .menu_settings                    { padding: 10px; }
+  .menu_settings select             { float:right; width:80px;}
    
   .edit .todo-input                 { display:none;width:98%;}
   .editing .display                 { display:none;}
@@ -10,7 +53,7 @@
   .timer-holder .time               { font-size:80px;margin:0 0 20px 20px;cursor:pointer;}
   .timer-holder .time:hover         { color : #9f11d3;}
   .title				                    { color:#e5e1e1;position:relative;top:30px;}
-  .taskInput                        { width:98%;height:40px;font-size:18pt;color:#9f11d3;}
+  .taskInput                        { width:98%;height:40px;font-size:18pt;}
 
   #todo-list                        { font-size:14px;}
   #todo-list .done                  { text-decoration:line-through;}
@@ -18,3 +61,4 @@
   #todo-list .removeArea            { width:15px;}
 
   .totalArea                        { margin: 25px 0 0 3px;}
+
