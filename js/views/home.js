@@ -2,24 +2,12 @@
 	"use strict";
 	var home = APP.namespace('APP.home');
 
-	function init_appsettings(){
-
-		var settings = APP.models.Settings;
-		settings.fetch();
-		
-		
-
-		if(settings.length === 0){
-		    settings.create({});
-		}
-	}
+	
 
 	home.view = Backbone.View.extend({
 	    el : '.main',
         initialize : function() {
     	
-          init_appsettings();
-
           // if settings are valid start pomodoro
 
     	  var tasks = new APP.tasks.View({el : $('.task-holder')}),

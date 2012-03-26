@@ -2,7 +2,7 @@
 
 var models = APP.namespace('APP.models');
 
-	models.Setting = Backbone.Model.extend({
+	var Setting = Backbone.Model.extend({
 		defaults: function() {
 	      return {
 	        timer_minutes:  25
@@ -10,9 +10,9 @@ var models = APP.namespace('APP.models');
 	    }
 	});
 
-	models.SettingsCollection =  Backbone.Collection.extend({
+	var SettingsCollection =  Backbone.Collection.extend({
 		
-		model : models.Setting,
+		model : Setting,
 	    
 	    // store the Todos's
 	    localStorage : new Store("settings"),
@@ -23,6 +23,6 @@ var models = APP.namespace('APP.models');
 	    }
 	});
 
-	models.Settings = new models.SettingsCollection();
+	models.Settings = new SettingsCollection();
 
 })(jQuery);

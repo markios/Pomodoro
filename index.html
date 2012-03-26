@@ -182,17 +182,33 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            var mainView;
+            function init_appsettings(){
+              var settings = APP.models.Settings;
+              settings.fetch();
+            
+              if(settings.length === 0){
+                  settings.create({});
+                  return false;
+              }
+              return true;
+            }
 
             var App = Backbone.Router.extend({
               routes: {
-                "": "index"
+                "": "index",
+                "pomodoro" : "pomodoro"
               },
               index: function() {
-                if(!mainView){
-                  mainView = new APP.home.view();
-                  mainView.render(); 
-                }
+                 // set up
+                 var settingsArePresent = init_appsettings();
+                 if(settingsArePresent){
+                    app.navigate("pomodoro", {trigger: true});   
+                 }
+              },
+              pomodoro : function(){
+
+                var mainView = new APP.home.view();
+                mainView.render(); 
               }
             });
             window.app = new App();
