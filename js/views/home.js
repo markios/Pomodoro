@@ -1,10 +1,45 @@
 (function($, undefined){
 	"use strict";
-	var home = APP.namespace('APP.home');
+	var application = APP.namespace('APP');
 
-	
+	function settingsArePresent(){
+          return APP.models.Settings.length > 0;
+    }
 
-	home.view = Backbone.View.extend({
+	application.init = function(){
+		
+		// get the  app settings
+		var settings = APP.models.Settings;
+        settings.fetch();
+
+        // initialize backbone application
+        var App = Backbone.Router.extend({
+          routes: {
+            "": "index",
+            "pomodoro" : "pomodoro"
+          },
+          index: function() {
+             // set up
+             if(settingsArePresent()){
+             	// forward user to their tasks
+                app.navigate("pomodoro", {trigger: true});   
+             }
+             application.home
+          },
+          pomodoro : function(){
+          	var mainView = new APP.pomodoro();
+            mainView.render(); 
+          }
+        });
+        window.app = new App();
+        Backbone.history.start();
+	};
+
+	application.home = {
+		// this will run jags stuff
+	}
+
+	application.pomodoro = Backbone.View.extend({
 	    el : '.main',
         initialize : function() {
     	

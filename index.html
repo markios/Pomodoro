@@ -40,34 +40,6 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                Settings
-                <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                      <div class="menu_settings">
-                       <label>Timer</label>
-                       <select id="timer">
-                          <option value="5">5</option>
-                          <option value="10">10</option>
-                          <option value="15">15</option>
-                          <option value="20">20</option>
-                          <option value="25">25</option>
-                          <option value="30">30</option>
-                          <option value="35">35</option>
-                          <option value="40">40</option>
-                          <option value="45">40</option>
-                          <option value="50">40</option>
-                          <option value="55">40</option>
-                          <option value="60">60</option>
-                       </select>
-                      </div>
-                    </li>
-                    
-                </ul>
-              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -182,37 +154,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            function init_appsettings(){
-              var settings = APP.models.Settings;
-              settings.fetch();
-            
-              if(settings.length === 0){
-                  settings.create({});
-                  return false;
-              }
-              return true;
-            }
-
-            var App = Backbone.Router.extend({
-              routes: {
-                "": "index",
-                "pomodoro" : "pomodoro"
-              },
-              index: function() {
-                 // set up
-                 var settingsArePresent = init_appsettings();
-                 if(settingsArePresent){
-                    app.navigate("pomodoro", {trigger: true});   
-                 }
-              },
-              pomodoro : function(){
-
-                var mainView = new APP.home.view();
-                mainView.render(); 
-              }
-            });
-            window.app = new App();
-            Backbone.history.start();
+            APP.init();
         });
     </script>
 
