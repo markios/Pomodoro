@@ -2,7 +2,7 @@
 	
 	var task = APP.namespace('APP.tasks');
 
-	task.TodoView = APP.parentView.extend({
+	task.TodoView = Backbone.View.extend({
 		tagName:  "tr",
 
 	    // Cache the template function for a single item.
@@ -74,7 +74,7 @@
 	    }
 	});
 	
-	task.View = APP.parentView.extend({
+	task.View = Backbone.View.extend({
 		_template : '#taskTemplate',
 		_totalArea : $('#total'),
 		initialize: function() {

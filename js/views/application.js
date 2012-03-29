@@ -36,31 +36,35 @@
 	};
 
 	application.home = {
-		// this will run jags stuff
+		// this will homepage stuff
 	}
 
 	application.pomodoro = Backbone.View.extend({
 	    el : '.main',
+	    _bindPomodoroChange : function(){
+	    	this._currentPomodoro.bind('change', function(event){
+	    		console.log('time');
+	    	});
+	    },
         initialize : function() {
     	
-          // if settings are valid start pomodoro
-
-    	  var tasks = new APP.tasks.View({el : $('.task-holder')}),
+          var tasks = new APP.tasks.View({el : $('.task-holder')}),
 	          timer = new APP.timer.view({el : $('.timer-holder')}),
-	          statistics = new APP.statistics.view({ el : $('#statistics')});
+	          statistics = new APP.statistics.view({ el : $('#statistics')}),
+	          self = this;
 			
 			  // fetch models
 			  APP.models.Todos.fetch();
-			  APP.models.Pomodoros.fetch();
 
+			  APP.models.Pomodoros.bind('add', function(){
+			  	 self._currentPomodoro = APP.models.Pomodoros.at(0);
+			  	 self._bindPomodoroChange();	
+			  });
+			  
 			  // render the views
 			  timer.render();
 	      	  statistics.render();
-
-		},
-	    render: function(){
-			
-	    }
+		}
 	});
 	
 })(jQuery)

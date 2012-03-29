@@ -2,7 +2,7 @@
 
 	var statistics = APP.namespace('APP.statistics');
 
-	statistics.view = APP.parentView.extend({
+	statistics.view = Backbone.View.extend({
 		_tasksElements : [],
 		_updateTaskStats : function(){
 			

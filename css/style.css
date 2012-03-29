@@ -37,7 +37,32 @@
         -webkit-animation-iteration-count: 2; 
       }
 
+      @keyframes flasher
+      {
+        from {color: black;}
+        50% { color : blue;}
+        to {color: black;}
+      }
 
+      @-moz-keyframes flasher /* Firefox */
+      {
+        from {color: black;}
+        to {color: blue;}
+      }
+
+      @-webkit-keyframes flasher /* Safari and Chrome */
+      {
+        from {color: black;}
+        50% { color : blue;}
+        to {color: black;}
+      }
+
+      .reset
+      {
+         -webkit-animation-name: flasher; 
+         -webkit-animation-duration: 0.5s; 
+         -webkit-animation-iteration-count: 3; 
+      }
 
   .task-holder 			                { }
   .task-holder .task	              {  }

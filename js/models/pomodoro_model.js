@@ -3,22 +3,59 @@
 
 	var models = APP.namespace('APP.models');
 
-	models.Pomodoro = Backbone.Model.extend({
+	var Pomodoro = Backbone.Model.extend({
 		defaults: function() {
 	      return {
 	        done:  false,
-	        created: new Date()
+	        created: new Date(),
+	        sec : 0
 	      };
 	    },
-	    // Toggle the `done` state of this Todos item.
-	    toggle: function() {
-	      this.save({done: !this.get("done")});
-	    }
+	    continue : function(){
+	    	if(this._timerStarted){
+	    		this._stop();
+	    	} else {
+	    		this._start();
+	    	}
+	    },
+	    _start : function(){
+	    	var self = this;
+
+	    	this._timerStarted = true;
+        	self._countdown(); 
+	    	
+	    	// begin the interval
+	    	this._timer = setInterval(function(){ 
+                self._countdown(); 
+        	}, 1000);
+	    },
+	    _stop : function (){
+	    	this._timerStarted = false;
+            clearInterval(this._timer);	
+	    },
+	    _padTime : function (time) {
+    		return (time < 10) ? '0' + time  : time;
+  		},
+	    _countdown : function(){
+		    if(this.attributes.min == 0 && this.attributes.sec == 0) {
+		      this._stop();
+		    } 
+		    if(this.attributes.sec == 0) {
+		      this.attributes.min -= 1;
+		      this.attributes.sec = 59;
+		    } else {
+		      this.attributes.sec -= 1;   
+		    }
+		    this.change();
+		},
+		getTime : function(){
+			return this.attributes.min + ' : ' + this._padTime(this.attributes.sec);
+		}
 	});
 
-	models.PomodoroCollection = Backbone.Collection.extend({
+	var PomodoroCollection = Backbone.Collection.extend({
 		
-		model : models.Pomodoro,
+		model : Pomodoro,
 	    
 	    // store the Todos's
 	    localStorage : new Store("pomodoros"),
@@ -34,6 +71,6 @@
 	    
 	});
 
-	models.Pomodoros = new models.PomodoroCollection();
+	models.Pomodoros = new PomodoroCollection();
 
 })(jQuery);

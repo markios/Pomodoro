@@ -1,66 +1,48 @@
 (function($, undefined){
 	var timer = APP.namespace('APP.timer');
 	
-	timer.view = APP.parentView.extend({
+	timer.view = Backbone.View.extend({
 		initialize: function() {
-			this.el = $(this.el).find('.time');
-            this._min = APP.models.Settings.getSettings().timer_minutes;
-		},
+            this.el = $(this.el).find('.time');
+            this._createPomodoro();
+            // create shortcut stuff
+            var self = this;    
+            $(document).on('keypress', function(e){
+                if(e.keyCode === 174){
+                    self.reset();
+                }
+                if(e.keyCode === 960){
+                    self.activate();
+                }    
+            });
+
+            this.render();
+        },
         render : function(){
-			this._showTime();
+            this.el.html(this._currentPomodoro.getTime());
 		},
+        _createPomodoro : function(){
+            var min = APP.models.Settings.getSettings().timer_minutes,
+                self = this;
+
+            this._currentPomodoro = APP.models.Pomodoros.create({min : min});
+
+            this._currentPomodoro.bind('change', function(){
+                self.render();
+            });
+        },
         events : {
 	        "click .time" : "activate",
     	    "dblclick .time" : "reset"
     	},
-    	_sec : 0,
-    	_timerStarted : false,
-
-    	_countdown : function(){
-		    this._showTime();      
-		    
-		    if(this._min == 0 && this._sec == 0) {
-		      this._stop();
-		    } 
-		    if(this._sec == 0) {
-		      this._min -= 1;
-		      this._sec = 59;
-		    } else {
-		      this._sec -= 1;   
-		    }
-		},
         activate : function() {
-        	if(this._timerStarted) {
-        		this._stop();
-        	} 
-        	else {
-        		this._start();
-        	}
+            this._currentPomodoro.continue();
         },
-        _padTime : function (time) {
-    		return (time < 10) ? '0' + time  : time;
-  		},
-  		_showTime : function () {
-     		this.el.html(this._padTime(this._min) + ' : ' + this._padTime(this._sec));
-  		},
         reset : function(){
-        	this._min = APP.models.Settings.getSettings().timer_minutes;
-        	this._sec = 0;
-        	this._showTime();
-        },
-        _start : function () {
-        	var self = this;
-        	this._timerStarted = true;
-        	self._countdown(); 
-            
-            this._timer = setInterval(function(){ 
-                self._countdown(); 
-        	}, 1000);
-		},
-        _stop : function () {
-            this._timerStarted = false;
-            clearInterval(this._timer);	
+           this._currentPomodoro.destroy();
+           this._createPomodoro();
+           this.render();
+           this.el.addClass('reset');
         }
-		
 	});
 })(jQuery)
