@@ -2,7 +2,7 @@
 	
 	var task = APP.namespace('APP.tasks');
 
-	task.TodoView = Backbone.View.extend({
+	var TodoView = Backbone.View.extend({
 		tagName:  "tr",
 
 	    // Cache the template function for a single item.
@@ -116,7 +116,7 @@
 	    	APP.models.Todos.each(this.addOne);
 	    },
         addOne : function(item) {
-        	var todoItem = new task.TodoView({model : item});
+        	var todoItem = new TodoView({model : item});
         	$("#todo-list").append(todoItem.render().el);
         },
 		addTask : function (e) {
