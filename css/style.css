@@ -19,6 +19,7 @@
           color:    #DCDCDC !important;
       }
 
+
       @-webkit-keyframes pulse {
         from {
           -webkit-transform: scale(1.0);
@@ -66,16 +67,12 @@
 
         /* ========== HOME INTRO PAGE ========== */
   
-      .clock{ background: url(../images/timer_doodle_rotate.png) no-repeat; height:216px; margin:0 auto; padding-top:85px; width:202px;}
-   .clock_hand { background: url(../images/timer_doodle_hand.png) no-repeat; height:76px; width:106px;  margin:0 auto; -webkit-animation: rotate 10s infinite  linear;  -moz-animation: rotate 10s infinite  linear;  }
+      .clock{ position:absolute;right:60px;top:100px;background: url(../images/timer_doodle_rotate.png) no-repeat; height:216px; margin:0 auto; padding-top:85px; width:202px;}
+      .clock_hand { background: url(../images/timer_doodle_hand.png) no-repeat; height:76px; width:106px;  margin:0 auto; -webkit-animation: rotate 10s infinite  linear;  -moz-animation: rotate 10s infinite  linear;  }
 
-   .play_button { width:20px; height:20px; border-radius:30px; background:#fff; padding:15px 20px 25px; border:1px solid #ccc; cursor:pointer; 
-            -webkit-transition-property:box-shadow; -webkit-transition-duration:0.5s; 
-            -moz-transition-property:box-shadow; -moz-transition-duration:0.5s; }
-    .play_button:hover  { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); }
-
-    
-   .play_arrow  { border-color: transparent transparent transparent #555555; border-style: solid; border-width: 15px 25px; height: 0; width: 0;}
+      .hero_content {position:relative;}
+      .hero_content .intro {width:75%;}
+   
 
 /* === Home Intro - Keyframes === */   
 @-webkit-keyframes rotate {

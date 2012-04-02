@@ -2,12 +2,7 @@
 	"use strict";
 	var application = APP.namespace('APP');
 
-	function settingsArePresent(){
-       return APP.models.Settings.length > 0;
-  }
-
-  function appicationMenuController(){
-
+	function appicationMenuController(){
      function launchModal(){
      	  var element = $('#settingsModal'),
       	  settings = new APP.settings.view({el : element});
@@ -49,22 +44,14 @@
           },
           index: function() {
              // if settings are there and its first view
-             // go straight to task page
-             if(settingsArePresent() && !this._currentView){
-             	// forward user to their tasks
-                app.navigate("pomodoro", {trigger: true});   
-             } 
-             else {
-              this._hidePrevious();
-             	
-	          	this.home.render();
-              this._currentView = "home";
-             }
+            this._hidePrevious();
+            this.home.render();
+            this._currentView = "home";
+            
           },
           pomodoro : function(){
              this._hidePrevious();
-
-          	 this.pomodoro.render(); 
+             this.pomodoro.render(); 
              this._currentView = "pomodoro";
           }
         });
@@ -74,8 +61,14 @@
 
 	application.home = APP.base.pageView.extend({
 		initialize : function(){
-		  // bind to page focus change event
-  	}	
+		   this.hero = $('#js_hero', this.el);
+    },
+    events : {
+       "click #js_watch_tutorial" : "showTutorial"
+    }, 
+    showTutorial : function(event){
+       
+    }
   });
 
 	application.pomodoro = APP.base.pageView.extend({
