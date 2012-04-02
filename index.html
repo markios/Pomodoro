@@ -53,94 +53,103 @@
         </div>
       </div>
     </div>
-    <!-- Home -->
-    <div id="home" class="container main">
-      <div class="hero-unit span9">
-        <h1>Welcome</h1>
-        <div class="clock">
-          <div class="clock_hand"></div>   
-         </div
+    <div class="container main">
+      <!-- Home -->
+      <div id="home" class="hide">
+        <div class="hero-unit span10">
+          <h1>Digital Pomodoro</h2>
+          <br />
+          <p>
+            The Pomodoro Technique® is a way to get the most out of time management. Turn time into a valuable ally to accomplish what we want to do and chart continuous improvement in the way we do it.
+          </p>
+          <p>
+            Francesco Cirillo created the Pomodoro Technique® in the 1980s. It is now practiced by professional teams and individuals around the world.
+          </p>
+          <p>
+            But even better than that, this application encorporates a task list just to make your working life that bit more productive.
+          </p>
+          <a class="btn btn-primary btn-large">Watch tutorial »</a>
+        </div>
       </div>
-    </div>
-    <! -- end Home -->
+      <!-- end Home -->
 
     <!-- Pomodoro section -->
-    <div id="pomodoro" class="container main hide">
-      
-      <!-- TASKS-->
-       <div class="row">
-      
-        <div class="span5 offset1">
-          <div class="clearfix">
-              <div class="input task-holder">
-                  <input id="task" class="xlarge taskInput" type="text" placeholder="Enter your task here" />
-              </div>
-              <div class="totalArea">
-                 <span id="total"></span>
-                 <span class="offset3">
-                   <div class="btn-group task_type">
-                     <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-                       All
-                       <span class="caret"></span>
-                     </a>
-                     <ul class="dropdown-menu">
-                       <li><a href="#">In Progress</a></li>
-                       <li><a href="#">Complete</a></li>
-                     </ul>
-                   </div>
-                 </span>
-              </div>
-          </div>
-        </div>
+      <div id="pomodoro" class="hide">
         
-        <!-- TIMER -->
-        <div class="span3 well timer-holder">
-          <i class="icon-time"></i>
-          <div class="time"></div>
-        </div>
-      
-      </div>
-      
-      <div class="row">
-        <div class="span5 offset1">
-            <div id="js_noTasks" class="alert alert-info">
-               <h3>You have no Tasks!</h3><br />
-               <p>If you have completed them all Well done.</p>
-               <p>If not, what are you waiting for? enter some above and start organising yourself!.</p>
+        <!-- TASKS-->
+         <div class="row">
+        
+          <div class="span6 offset1">
+            <div class="clearfix">
+                <div class="input task-holder">
+                    <input id="task" class="xlarge taskInput" type="text" placeholder="Enter your task here and press enter." />
+                </div>
+                <div class="totalArea">
+                   <span id="total"></span>
+                   <span class="offset3">
+                     <div class="btn-group task_type">
+                       <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+                         All
+                         <span class="caret"></span>
+                       </a>
+                       <ul class="dropdown-menu">
+                         <li><a href="#">In Progress</a></li>
+                         <li><a href="#">Complete</a></li>
+                       </ul>
+                     </div>
+                   </span>
+                </div>
             </div>
-            <table class="table table-striped" id="todo-list">
-           
-            </table>
+          </div>
+          
+          <!-- TIMER -->
+          <div class="span3 well timer-holder">
+            <i class="icon-time"></i>
+            <div class="time"></div>
+          </div>
+        
         </div>
         
-        <div id="statistics" class="span3 well">
-          <i class="icon-pencil"></i>
-          <span class="header"><strong>Statistics</strong></span>
-          <div id="Pomodoro_today" class="data-row">
-            <span class="label label-info data">0</span>
-            <span class="data-text">Pomodoro's Completed Today</span>
+        <div class="row">
+          <div class="span6 offset1">
+              <div id="js_noTasks" class="alert alert-info">
+                 <h3>You have no Tasks!</h3><br />
+                 <p>If you have completed them all Well done.</p>
+                 <p>If not, what are you waiting for? enter some above and start organising yourself!.</p>
+              </div>
+              <table class="table table-striped" id="todo-list">
+             
+              </table>
           </div>
-          <div class="data-row">
-            <span class="label label-info data">0</span>
-            <span class="data-text">Total Pomodoro's</span>
-          </div>
-          <div class="data-row">
-            <span id="total_tasks" class="label label-default data pulse">0</span>
-            <span class="data-text">Total Tasks</span>
-          </div>
-          <div class="data-row">
-            <span id="inProgress_tasks" class="label label-warning data pulse">0</span>
-            <span class="data-text">In progress</span>
-          </div>
-          <div class="data-row">
-            <span id="complete_tasks" class="label label-success data pulse">0</span>
-            <span class="data-text">Complete</span>
+          
+          <div id="statistics" class="span3 well">
+            <i class="icon-pencil"></i>
+            <span class="header"><strong>Statistics</strong></span>
+            <div id="Pomodoro_today" class="data-row">
+              <span class="label label-info data">0</span>
+              <span class="data-text">Pomodoro's Completed Today</span>
+            </div>
+            <div class="data-row">
+              <span class="label label-info data">0</span>
+              <span class="data-text">Total Pomodoro's</span>
+            </div>
+            <div class="data-row">
+              <span id="total_tasks" class="label label-default data pulse">0</span>
+              <span class="data-text">Total Tasks</span>
+            </div>
+            <div class="data-row">
+              <span id="inProgress_tasks" class="label label-warning data pulse">0</span>
+              <span class="data-text">In progress</span>
+            </div>
+            <div class="data-row">
+              <span id="complete_tasks" class="label label-success data pulse">0</span>
+              <span class="data-text">Complete</span>
+            </div>
           </div>
         </div>
+
       </div>
-
-    </div> <!-- /container -->
-
+    </div> <!-- /container -->    
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -164,6 +173,7 @@
     <script src="js/backbone.js" type="text/javascript"></script>
     <script src="js/backbone-localstorage.js" type="text/javascript"></script>
     <script src="js/global.js" type="text/javascript"></script>
+    <script src="js/views/base_view.js" type="text/javascript"></script>
     <script src="js/models/settings_model.js" type="text/javascript"></script>
     <script src="js/models/todos_model.js" type="text/javascript"></script>
     <script src="js/views/menu.js" type="text/javascript"></script>

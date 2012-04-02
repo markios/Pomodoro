@@ -100,7 +100,7 @@
   
   .timer-holder			                {  }
   .timer-holder .time               { font-size:80px;margin:0 0 20px 20px;cursor:pointer;}
-  .timer-holder .time:hover         { color : #9f11d3;}
+  .timer-holder .time:hover         { }
   .title				                    { color:#e5e1e1;position:relative;top:30px;}
   .taskInput                        { width:98%;height:40px;font-size:18pt;}
 
