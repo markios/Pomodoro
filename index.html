@@ -26,11 +26,47 @@
     <div id="settingsModal" class="modal hide fade">
       <!-- dialog contents -->
       <div class="modal-body">
-          Settings
+          <h2>Settings</h2>
+          <br />
+          <div class="data-row">
+            <div class="control-group js_setting_element">
+              <label>Pomodoro Time (mins): </label>
+              <select rel="PomodoroTime" class="js_time_setting">
+                  <option>20</option>
+                  <option>25</option>
+                  <option>30</option>
+                  <option>35</option>
+                  <option>40</option>
+                  <option>50</option>
+                  <option>55</option>
+                  <option>60</option>
+              </select>
+              <span class="js_save_message hide help-inline"><i class="icon-ok-circle"></i> Saved</span>
+            </div>
+          </div>
+          <div class="data-row">
+            <div class="control-group js_setting_element">
+              <label>Rest Time (mins): </label>
+              <select rel="ShortRestTime" class="js_time_setting">
+                  <option>10</option>
+                  <option>15</option>
+                  <option>20</option>
+                  <option>25</option>
+                  <option>30</option>
+                  <option>35</option>
+                  <option>40</option>
+                  <option>50</option>
+                  <option>55</option>
+                  <option>60</option>
+              </select>
+              <span class="js_save_message hide help-inline"><i class="icon-ok-circle"></i> Saved</span>
+            </div>
+          </div>
       </div>
+      
       <!-- dialog buttons -->
       <div class="modal-footer">
-          <a class="btn primary">OK</a>
+          <a class="btn primary">Ok</a>
       </div>
     </div>
     <!-- end settings dialog -->
@@ -56,6 +92,7 @@
     <div class="container main">
       <!-- Home -->
       <div id="home" class="hide">
+        <!-- start hero -->
         <div id="js_hero" class="hero-unit span10 hero_content">
           <div class="intro">
             <h1>Digital Pomodoro</h2>
@@ -76,6 +113,12 @@
               <div class="clock_hand"></div>
             </div>
         </div>
+        <!-- start hero -->
+        <!-- start tutorial -->
+        <div id="js_tutorial" class="hide span10" style="background-color:#CCC;height:400px;">
+          <h1>Tutorial video here</h1>
+        </div>
+        <!-- -->
       </div>
       <!-- end Home -->
 
@@ -158,7 +201,7 @@
     </div> <!-- /container -->    
     <hr>
     <footer>
-      <p class="span10 offset1">Digital Pomodoro 2012 - Written by @Mark_Kellett & Jagdeep Kumar</p> 
+      <p class="span4 offset1">Digital Pomodoro 2012 - Written by @Mark_Kellett</p> 
     </footer>
     <!-- Le javascript
     ================================================== -->
@@ -213,6 +256,5 @@
         </td>
         <td class="removeArea"><i class="icon-remove-sign todo-destroy"></i></td>
     </script>
-
   </body>
 </html>

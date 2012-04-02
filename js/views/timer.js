@@ -1,3 +1,4 @@
+
 (function($, undefined){
 	var timer = APP.namespace('APP.timer');
 	
@@ -22,7 +23,7 @@
             this.el.html(this._currentPomodoro.getTime());
 		},
         _createPomodoro : function(){
-            var min = APP.models.Settings.getSettings().timer_minutes,
+            var min = APP.models.Settings.getSettings().pomodoro_time,
                 self = this;
 
             this._currentPomodoro = APP.models.Pomodoros.create({min : min});

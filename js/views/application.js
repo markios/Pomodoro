@@ -25,6 +25,10 @@
 		var settings = APP.models.Settings;
         settings.fetch();
 
+        if(settings.models.length === 0){
+           settings.create();
+        }
+
         appicationMenuController();
 
         // initialize backbone application
@@ -62,19 +66,22 @@
 	application.home = APP.base.pageView.extend({
 		initialize : function(){
 		   this.hero = $('#js_hero', this.el);
+       this.tutorial = $('#js_tutorial', this.el);
     },
     events : {
        "click #js_watch_tutorial" : "showTutorial"
     }, 
     showTutorial : function(event){
-       
+       this.hero.addClass('hide');
+       this.tutorial.removeClass('hide');
     }
   });
 
 	application.pomodoro = APP.base.pageView.extend({
-	    _defaultTitle : "Pomodoro",
+	    _defaultTitle : document.title,
       _bindPomodoroChange : function(){
 	    	var self = this;
+        
 	    	this._currentPomodoro.bind('remove', function(){
 	    		self._setDocumentTitle(self._defaultTitle);
 	    	});

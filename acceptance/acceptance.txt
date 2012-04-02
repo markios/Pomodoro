@@ -37,6 +37,19 @@ as a task user
 	when I double click on a timer
 	I should see the timer reset
 
+as a task user 
+	when I reset the timer
+	I should see the timer return to the current waiting time.
+
+as a task user 
+	when I click on the rest time button
+	I should see the timer change to a rest time.
+
+as a task user
+	when the time runs down to zero
+	I should be notified that the pomodoro has finished 
+	and given the option to proceed with a rest.
+
 OPTIONS
 
 as a task user
