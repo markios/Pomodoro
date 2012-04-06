@@ -6,8 +6,29 @@
   settings.view = Backbone.View.extend({
   	events: {
   		"click a.btn" : "closeModal",
-      "change .js_time_setting" : "setTimeSetting"
+      "change .js_time_setting" : "updateTimeSetting"
   	},
+    _dateRages : {
+      short_range : { lower : 5, upper: 30 },
+      long_range : { lower : 15, upper: 60 }
+    },
+    _applyWebkitNotifications : function(event){
+      var self = this;
+
+      if(!window.webkitNotifications) return;
+
+      if(window.webkitNotifications.checkPermission() === 0){
+         this._allowNotifications.attr('DISABLED', true);
+      }
+      else{
+         this._allowNotifications.on('click', function(){
+            window.webkitNotifications.requestPermission(function(){
+              self._allowNotifications.attr('DISABLED', true); 
+              APP.createNotification();
+            });
+         });   
+      }
+    },
     _displaySuccessFor : function($element){
       $element
         .parent()
@@ -16,20 +37,44 @@
             .removeClass('hide');
 
     },
+    _appendOptionsRangeFor : function(element){
+      var range = this._dateRages[element.attr('rel')],
+          settingTime = +APP.models.Settings["get" + element.attr('id')](),
+          html = "<option>1</option>";
+      
+      for(var i = range.lower; i <= range.upper; i += 5){
+         var isSelected = (i === settingTime) ? "SELECTED" : "";
+         html += "<option " + isSelected + ">" + i + "</option>";
+      }
+
+      element.append(html);
+    },
+    _addTimes : function(){
+        var self = this;
+        $.each(this._settingsElement, function(key, el){
+            var element = $(el).find('.js_time_setting');
+            self._appendOptionsRangeFor(element);
+        });
+    },
 	  initialize : function(){
   		var self = this;
   		this._button = this.el.find('a.btn');
       this._settingsElement = this.el.find('.js_setting_element');
-      
+      this._allowNotifications = $('#AllowNotifications');
+
+      this._addTimes();
+
+      this._applyWebkitNotifications();
+
     	// remove the event listeners when the dialog is hidden
 	    this.el.bind("hide", function() {
 	        // remove event listeners on the buttons
 	        self._button.unbind();
 	    });
   	},
-    setTimeSetting : function(event){
+    updateTimeSetting : function(event){
       var element = $(event.currentTarget);
-      APP.models.Settings['set' + element.attr('rel')](element.val());
+      APP.models.Settings['set' + element.attr('id')](element.val());
       this._displaySuccessFor(element);
     },
   	closeModal : function(event){
@@ -37,21 +82,18 @@
   		this.el.modal('hide');
   	},
   	render : function(){
-      // set current rest time
+      // reset styles
+      this._settingsElement.removeClass('success');
 
-      // set current pomodoro time
-      this._settingsElement.each(function(el){
-         var $element = $(el);
-         $element.removeClass('success')
+      this._settingsElement
               .find('.js_save_message')
                 .addClass('hide');
-      });
 
-
+      // kick off the modal window
 		  this.el.modal({
 	      "backdrop"  : "static",
 	      "keyboard"  : true,
-	      "show"      : true    // this parameter ensures the modal is shown immediately
+	      "show"      : true    
 	    });
     }
   });

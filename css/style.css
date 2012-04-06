@@ -1,110 +1,256 @@
+/*!
+ * Digital Pomodora
+ * prefixes solved with the use of -prefix-free
+ */
+      body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */     }
+	  
+	  footer { text-align:center; }
+	   /* ========== TASKS PAGE  ========== */
+      #statistics .data-row { margin-top:15px; clear: both; margin-bottom: 15px;}
+      #statistics .data-row .data { padding:3px 5px 3px 5px; width:15px; display:inline-block; text-align:center; float: left; margin-right: 9px;}
+      #statistics .data-row .data-text { margin-left:10px; display: block; padding-top: 3px;}
+      #statistics .header { display:inline-block; margin-left:20px; }
+      .display       { -webkit-transition-property:padding-left; -webkit-transition-duration:500ms; transition-property:padding-left; transition-duration:500ms; margin-top: 4px;}
+      .display:hover { padding-left:10px; }
 
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-      #statistics .data-row {margin-top:15px;}
-      #statistics .data-row .data {padding:3px 5px 3px 5px;width:15px;display:inline-block;text-align:center;}
-      #statistics .data-row .data-text {margin-left:10px;}
-      #statistics .header {display:inline-block;margin-left:20px;}
-      .display       {-webkit-transition-property:padding-left;-webkit-transition-duration:500ms,500ms,500ms}
-      .display:hover {padding-left:10px}
+      .todo-text { cursor:pointer; }
+      .task_type {  float:right; }
 
-      .todo-text {cursor:pointer;}
-      .task_type {float:right;}
+      input::input-placeholder,
+      input:-moz-placeholder { color:    #DCDCDC !important; }
 
-      input::-webkit-input-placeholder {
-          color:    #DCDCDC !important;
-      }
-      input:-moz-placeholder {
-          color:    #DCDCDC !important;
-      }
+	.data-row .pulse {   animation-name: pulse;   animation-duration: 0.5s;  animation-iteration-count: 2; 
+										-webkit-animation-name: pulse;  -webkit-animation-duration: 0.5s;   -webkit-animation-iteration-count: 2; }
+	  
+	  .reset { animation-name: flasher;  animation-duration: 0.5s;  animation-iteration-count: 3; 
+		            -webkit-animation-name: flasher;   -webkit-animation-duration: 0.5s;  -webkit-animation-iteration-count: 3;  }
+	  
+	.task-holder { }
+	.task-holder .task {  }
 
+	.menu_settings { padding: 10px; }
+	.menu_settings select { float:right; width:80px;}
 
-      @-webkit-keyframes pulse {
-        from {
-          -webkit-transform: scale(1.0);
-        }
-        50% {
-          -webkit-transform: scale(1.2);
-        }
-        to { 
-          -webkit-transform: scale(1.0);
-        }
-      }
+	.edit .todo-input { display:none;width:98%;}
+	.editing .display { display:none;}
+	.editing input { display: block !important;}
+	.editing .checkArea { padding-top:10px; }
+	.icon-remove-sign { margin-top: 4px;  -webkit-transition-property:opacity; -webkit-transition-duration:500ms; transition-property:opacity; transition-duration:500ms; cursor:pointer;  }
+	.icon-remove-sign:hover { opacity:0.4;}
 
-      .data-row .pulse { 
-        -webkit-animation-name: pulse; 
-        -webkit-animation-duration: 0.5s; 
-        -webkit-animation-iteration-count: 2; 
-      }
+	.timer-holder {  }
+	.timer-holder .time { font-size:60px;margin:0 0 20px 20px;cursor:pointer;}
+	.timer-holder .time:hover { }
+	.title { color:#e5e1e1;position:relative;top:30px;}
+	.taskInput { width:98%;height:40px;font-size:18pt; line-height: 25px;}
 
-      @keyframes flasher
-      {
-        from {color: black;}
-        50% { color : blue;}
-        to {color: black;}
-      }
+	#todo-list { font-size:14px;}
+	#todo-list .done { text-decoration:line-through;}
+	#todo-list .checkArea { width:15px;}
+	#todo-list .removeArea { width:15px;}
 
-      @-moz-keyframes flasher /* Firefox */
-      {
-        from {color: black;}
-        to {color: blue;}
-      }
+	.totalArea { margin: 0px 0 0 3px; height: 54px;} 
+	  
+	 /* === Task Page - Keyframes === */   
+	@keyframes pulse {
+		from { transform: scale(1.0); } 
+		50% {  transform: scale(1.2); } 
+		to {   transform: scale(1.0); } 
+	}
+	@-webkit-keyframes pulse { 
+		from { -webkit-transform: scale(1.0); } 
+		50% {  -webkit-transform: scale(1.2); } 
+		to {   -webkit-transform: scale(1.0); } 
+	}
 
-      @-webkit-keyframes flasher /* Safari and Chrome */
-      {
-        from {color: black;}
-        50% { color : blue;}
-        to {color: black;}
-      }
+	@keyframes flasher   { 
+		from {color: black;}  
+		50% { color : blue;} 
+		to {color: black;} 
+	}
+	@-webkit-keyframes flasher  {  
+		from {color: black;} 
+		to {color: blue;} 
+	}
 
-      .reset
-      {
-         -webkit-animation-name: flasher; 
-         -webkit-animation-duration: 0.5s; 
-         -webkit-animation-iteration-count: 3; 
-      }
+	/* ========== HOME INTRO PAGE ========== */
 
-        /* ========== HOME INTRO PAGE ========== */
-  
-      .clock{ position:absolute;right:60px;top:100px;background: url(../images/timer_doodle_rotate.png) no-repeat; height:216px; margin:0 auto; padding-top:85px; width:202px;}
-      .clock_hand { background: url(../images/timer_doodle_hand.png) no-repeat; height:76px; width:106px;  margin:0 auto; -webkit-animation: rotate 10s infinite  linear;  -moz-animation: rotate 10s infinite  linear;  }
+	.clock{ position:absolute; right:60px; top:100px; background: url(../images/timer_doodle_rotate.png) no-repeat; height:216px; margin:0 auto; padding-top:85px; width:202px;}
+	.clock_hand { background: url(../images/timer_doodle_hand.png) no-repeat; height:76px; width:106px;  margin:0 auto; -webkit-animation: rotate 10s infinite  linear;  animation: rotate 10s infinite  linear;  }
 
-      .hero_content {position:relative;}
-      .hero_content .intro {width:75%;}
+	.hero_content {position:relative;}
+	.hero_content .intro {width:75%;}
    
-
-/* === Home Intro - Keyframes === */   
-@-webkit-keyframes rotate {
-  0% { -webkit-transform: rotate(0deg); }
-  100% {   -webkit-transform: rotate(360deg); }
-}
-
-@-moz-keyframes rotate {
-  0% { -moz-transform: rotate(0deg); }
-  100% {   -moz-transform: rotate(360deg); }
-}
-
-  .task-holder 			                { }
-  .task-holder .task	              {  }
-
-  .menu_settings                    { padding: 10px; }
-  .menu_settings select             { float:right; width:80px;}
-   
-  .edit .todo-input                 { display:none;width:98%;}
-  .editing .display                 { display:none;}
-  .editing input                    { display: block !important;}
+	/* === Home Intro - Keyframes === */   
+	@keyframes rotate {
+	  0% { transform: rotate(0deg); }
+	  100% {   transform: rotate(360deg); }
+	}
+	@-webkit-keyframes rotate {
+		0% { -webkit-transform: rotate(0deg); }
+		100% {   -webkit-transform: rotate(360deg); }
+	}
   
-  .timer-holder			                {  }
-  .timer-holder .time               { font-size:80px;margin:0 0 20px 20px;cursor:pointer;}
-  .timer-holder .time:hover         { }
-  .title				                    { color:#e5e1e1;position:relative;top:30px;}
-  .taskInput                        { width:98%;height:40px;font-size:18pt;}
+  
+	/* ========== VIDEO ANIMATION ========== */
+	
+	#js_tutorial { width:770px; margin:0 auto; }
 
-  #todo-list                        { font-size:14px;}
-  #todo-list .done                  { text-decoration:line-through;}
-  #todo-list .checkArea             { width:15px;}
-  #todo-list .removeArea            { width:15px;}
+	/* main wrappers */
+	#wrapper_container {  width:100%;  overflow:hidden; position:relative;  border:3px solid #F5F5F5;}
+		
+		#wrapper_image_panel  {    height: 415px;   background: url(../images/screens/1_start_page.png) no-repeat; background-size:100%; position:relative; 
+															animation: animateBg 30s linear 1s forwards;  -webkit-animation: animateBg 30s linear 1s forwards;}
+		.image_panel { width:770px; height: 415px; position:absolute;  }
+			.image_enter_task { background: url(../images/screens/2_enter_task.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 6s forwards;  -webkit-animation: fadeIn  0.5s linear 6s forwards; opacity: 0; z-index:1;}		
+			.image_task_added { background: url(../images/screens/3_task_added.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 9s forwards;   -webkit-animation: fadeIn  0.5s linear 9s forwards; opacity: 0;  z-index:2;}		
+			.image_task_added_two { background: url(../images/screens/3_1_task_added.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 14.5s forwards;  -webkit-animation: fadeIn  0.5s linear 14.5s forwards;  opacity: 0;  z-index:3;}		
+			.image_task_added_three { background: url(../images/screens/3_2_task_added.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 15.5s forwards;   -webkit-animation: fadeIn  0.5s linear 15.5s forwards;  opacity: 0;  z-index:4;}	
 
-  .totalArea                        { margin: 25px 0 0 3px;}
+			.image_timer_one { background: url(../images/screens/4_timer.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 38.5s forwards;  -webkit-animation: fadeIn  0.5s linear 38.5s forwards;  opacity: 0;  z-index:5;}			
+			.image_timer_two { background: url(../images/screens/4_1_timer.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 39.5s forwards; -webkit-animation: fadeIn  0.5s linear 39.5s forwards; opacity: 0;  z-index:6;}	
+			.image_timer_three { background: url(../images/screens/4_2_timer.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 40.5s forwards;  -webkit-animation: fadeIn  0.5s linear 40.5s forwards; opacity: 0;  z-index:7;}	
+			.image_timer_four { background: url(../images/screens/4_3_timer.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 41.5s forwards;   -webkit-animation: fadeIn  0.5s linear 41.5s forwards; opacity: 0;  z-index:8;}	
+			.image_timer_five { background: url(../images/screens/4_4_timer.png) no-repeat;   background-size:100%; animation: fadeIn  0.5s linear 42.5s forwards;  -webkit-animation: fadeIn  0.5s linear 42.5s forwards; opacity: 0;  z-index:9;}		
 
+			.image_edit_task { background: url(../images/screens/5_edit_task.png) no-repeat;   background-size:100%; animation: fadeInOut  3.5s linear 48.5s forwards;  -webkit-animation: fadeInOut  3.5s linear 48.5s forwards; opacity: 0;  z-index:10;}	
+			.image_complete_task { background: url(../images/screens/6_complete_task.png) no-repeat;   background-size:100%; animation: fadeIn 0.5s linear 54.5s forwards; -webkit-animation: fadeIn 0.5s linear 54.5s forwards;  opacity: 0;  z-index:11;}		
+			.image_delete_task { background: url(../images/screens/7_delete_task.png) no-repeat;   background-size:100%; animation: fadeIn 0.5s linear 61.5s forwards; -webkit-animation: fadeIn 0.5s linear 61.5s forwards;  opacity: 0;  z-index:12;}		
+			.image_end { background: url(../images/screens/8_end.png) no-repeat;   background-size:100%; animation: fadeIn 0.5s linear 63.5s forwards; -webkit-animation: fadeIn 0.5s linear 63.5s forwards; opacity: 0;  z-index:999;}			
+
+
+		/* content bubble  */		
+		.wrapper_bubble {  background:#333333; border:1px solid #666666; color: #fff; font-size:12px; font-weight:bold; margin:10px auto; padding:10px 18px; position:absolute; text-align:center; width:auto; 
+											border-radius:10px;  box-shadow:0 0 5px #888888;   min-height: 20px;   opacity:0; z-index:99;  }
+
+			.bubble_arrow_border {  border-style: solid; border-width: 10px; height:0; width:0; position:absolute;  }
+			.bubble_arrow {  border-style: solid;  border-width: 10px; height:0; width:0; position:absolute; }				
+				
+				/* top arrow */
+				.arrow_top_border {  border-color:  transparent transparent  #666666 transparent; top:-20px; left:30px; }
+				.arrow_top {border-color: transparent  transparent #333 transparent; top: -18px; left:30px; }
+				
+				/* bottom arrow */
+				.arrow_bottom_border {  border-color: #666666  transparent transparent  transparent;   top: 61px; left:30px; }
+				.arrow_bottom {border-color: #333 transparent  transparent  transparent; top: 59px; left:30px; }
+		
+				/* left arrow */
+				.arrow_left_border {  border-color:  transparent transparent  transparent  #666666;   top: 10px;   right: -41px;  border-width: 10px 20px;}
+				.arrow_left {border-color:  transparent transparent transparent #333 ; top: 10px; right: -39px; border-width: 10px 20px; }
+				
+				
+				/* left arrow */
+				.arrow_right_border {  border-color:  transparent #666666 transparent  transparent ;   top: 10px;   left: -41px;  border-width: 10px 20px;}
+				.arrow_right {border-color:  transparent #333 transparent transparent  ; top: 10px; left: -39px; border-width: 10px 20px; }
+		
+				/* bubble positions */
+				.enter_task { top: 80px; left: 21px;  animation: fadeInOut 3.5s linear 2s forwards; -webkit-animation: fadeInOut 3.5s linear 2s forwards; }
+				
+				.task_added { top: 64px; left: 450px;  animation: fadeInOut 3.5s linear 10.5s forwards; -webkit-animation: fadeInOut 3.5s linear 10.5s forwards; }
+				.more_task_added {  top: 144px;   left: 450px;  animation: fadeInOut 3.5s linear 16.5s forwards;  -webkit-animation: fadeInOut 3.5s linear 16.5s forwards; }
+				
+				.new_task_totals { top: 236px; left: 260px;  animation: fadeInOut 3.5s linear  21.5s forwards; -webkit-animation: fadeInOut 3.5s linear  21.5s forwards;}
+				
+				.start_timer { top: 80px; left: 200px;  animation: fadeInOut 3.5s linear 26.5s forwards;  -webkit-animation: fadeInOut 3.5s linear 26.5s forwards;}
+				
+				.timer_instructions { top: 50px; right: 245px;  animation: fadeInOut 6.5s linear 31.5s forwards;  -webkit-animation: fadeInOut 6.5s linear 31.5s forwards;  }
+				
+				.edit_task { top: 190px; left: 65px;  animation: fadeInOut 3.5s linear 44.5s forwards; -webkit-animation: fadeInOut 3.5s linear 44.5s forwards;  }
+				
+				.complete_task { top: 195px; left: 7px; animation: fadeInOut 3.5s linear 52.5s forwards;  -webkit-animation: fadeInOut 3.5s linear 52.5s forwards;}
+					.complete_task .arrow_top_border {  left: 10px; }
+					.complete_task .arrow_top { left: 10px; }
+					
+				.delete_task { top: 195px; left: 412px;  animation: fadeInOut 3.5s linear 57.5s forwards; -webkit-animation: fadeInOut 3.5s linear 57.5s forwards; }
+					.delete_task .arrow_top_border {  left: 63px; }
+					.delete_task .arrow_top { left: 63px; }
+				
+				#player_controls { font-family: Helvetica, Arial, sans-serif;  animation: slideDownControls 0.7s linear 64.5s forwards; -webkit-animation: slideDownControls 0.7s linear 64.5s forwards; position:absolute; top:-45%; left: 24%;width:400px; opacity:0;  z-index:999;} 
+									
+					#player_controls #start_tasks a { background:#000 url(../images/task_icon.png) no-repeat 5px center; border-radius:5px;  color:#08C;  font-weight:bold; font-size:14px; 
+																				padding:15px 15px 15px 50px; width: 140px; margin-right: 9px;  transition-property:color; transition-duration:500ms; -webkit-transition-property:color; -webkit-transition-duration:500ms; float:left; }
+						#player_controls #start_tasks a:hover { color:#fff; text-decoration:none; }
+						
+					#player_controls #replay_video a { background:#000 url(../images/replay_white.png) no-repeat 5px center; border-radius:5px; color:#08C;  font-weight:bold; font-size:14px; 
+																				padding:15px 15px 15px 50px; width:120px;  transition-property:color; transition-duration:500ms; -webkit-transition-property:color; -webkit-transition-duration:500ms; float:left; }
+						#player_controls #replay_video a:hover { color:#fff;  text-decoration:none; }
+				
+
+	/* === Task Page - Keyframes === */   			
+	@keyframes fadeIn { 100% { opacity:1; } }	
+	@-webkit-keyframes fadeIn { 100% { opacity:1; } }	
+
+	@keyframes fadeInOut { 
+		0% { opacity:0;  } 
+		10% { opacity:1;  }  
+		90% {opacity:1;} 
+		100% { opacity:0;  } 
+	}
+	@-webkit-keyframes fadeInOut { 
+		0% { opacity:0;  } 
+		10% { opacity:1;  }  
+		90% {opacity:1;} 
+		100% { opacity:0;  } 
+	}
+
+	@keyframes slideDownControls { 100% { opacity:1; top:45%; } }
+	@-webkit-keyframes slideDownControls { 100% { opacity:1; top:45%; } }
+
+	@keyframes animateBg {	
+		/* tasks */
+		2% { transform: translateX(25%) translateY(10%) scale(1.5)  }
+		22% { transform: translateX(25%) translateY(10%) scale(1.5)  }
+
+		/* task / more tasks added */
+		24% { transform: translateX(25%) translateY(-20%) scale(1.5)  }
+		65% { transform: translateX(25%) translateY(-20%) scale(1.5)  }
+
+		/* stats */
+		67% { transform: translateX(-25%) translateY(-25%) scale(1.5)  }
+		82% { transform: translateX(-25%) translateY(-25%) scale(1.5)  }
+
+		/* timer */
+		84% { transform: translateX(-25%) translateY(15%) scale(1.5) }   
+		98% { transform: translateX(-25%) translateY(15%) scale(1.5) } 
+
+		/* full screen */
+		99% { transform: translateX(0%) translateY(0%) scale(1)  }
+	}
+
+	@-webkit-keyframes animateBg {	
+		/* tasks */
+		2% { -webkit-transform: translateX(25%) translateY(10%) scale(1.5)  }
+		22% { -webkit-transform: translateX(25%) translateY(10%) scale(1.5)  }
+
+		/* task / more tasks added */
+		24% { -webkit-transform: translateX(25%) translateY(-20%) scale(1.5)  }
+		65% { -webkit-transform: translateX(25%) translateY(-20%) scale(1.5)  }
+
+		/* stats */
+		67% { -webkit-transform: translateX(-25%) translateY(-25%) scale(1.5)  }
+		82% { -webkit-transform: translateX(-25%) translateY(-25%) scale(1.5)  }
+
+		/* timer */
+		84% { -webkit-transform: translateX(-25%) translateY(15%) scale(1.5) }   
+		98% { -webkit-transform: translateX(-25%) translateY(15%) scale(1.5) } 
+
+		/* full screen */
+		99% { -webkit-transform: translateX(0%) translateY(0%) scale(1)  }
+	}
+	
+	
+	/* ========== CUSTOM RESPONSIVE SETTINGS ========== */
+	@media (min-width: 1200px) {
+		.timer-holder .time { font-size: 80px;}
+	}
+	@media (max-width: 980px) {
+		body { padding-top: 0; }
+	}
+	@media (min-width: 768px) and (max-width: 980px) {
+		.timer-holder .time { font-size: 44px;}
+	}
+	@media (max-width: 768px) {
+		.row .timer-holder { margin-bottom: 21px; }
+		.timer-holder .time { font-size: 52px;}
+		.data-text { padding-top: 3px; }
+	}

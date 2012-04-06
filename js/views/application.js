@@ -3,21 +3,32 @@
 	var application = APP.namespace('APP');
 
 	function appicationMenuController(){
+     var settingsModal = new APP.settings.view({el : $('#settingsModal')});
+     
      function launchModal(){
-     	  var element = $('#settingsModal'),
-      	  settings = new APP.settings.view({el : element});
+     	    settingsModal.render();
+     }
 
- 	        settings.render();
+     if(window.webkitNotifications && window.webkitNotifications.checkPermission() === 0){
+        application.createNotification();          
      }
 
      $('#settings_option').on('click', function(event){
   	   event.preventDefault();
   	   launchModal();
      });
+
      $(document).on('keypress', function(event){
      	  if(event.keyCode === 223) launchModal();
      });
   }
+
+  application.createNotification = function(){
+      APP.settings.notification = window.webkitNotifications.createNotification(
+                    'images/clock.png', 
+                    'Pomodoro Complete', 
+                    'Your pomodoro is complete');
+  };
 
 	application.init = function(){
 		

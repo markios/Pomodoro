@@ -23,12 +23,21 @@ var models = APP.namespace('APP.models');
 	    	appSetting.attributes[attribute] = time;
 	    	appSetting.save();
 	    },
+	    _getSetting : function(setting){
+    		return this.models[0].attributes[setting];
+	    },
 		// Filter down the list of all todo items that are finished.
 	    getSettings: function() {
 	       return this.models[0].attributes;
 	    },
 	    setPomodoroTime : function(withTime){
 	    	this._updateTimeFor("pomodoro_time", withTime);
+		},
+		getPomodoroTime : function(){
+			return this._getSetting("pomodoro_time");
+		},
+		getShortRestTime : function(){
+			return this._getSetting("short_rest_time");
 		},
 	    setShortRestTime : function(withTime){
 	    	this._updateTimeFor("short_rest_time", withTime);

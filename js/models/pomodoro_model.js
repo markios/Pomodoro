@@ -37,13 +37,15 @@
     		return (time < 10) ? '0' + time  : time;
   		},
 	    _countdown : function(){
-		    if(this.attributes.min == 0 && this.attributes.sec == 0) {
+		    if(this.attributes.min === 0 && this.attributes.sec === 0) {
 		      this._stop();
+		      this.trigger("done");
 		    } 
-		    if(this.attributes.sec == 0) {
+		    else if(this.attributes.sec == 0) {
 		      this.attributes.min -= 1;
 		      this.attributes.sec = 59;
-		    } else {
+		    } 
+		    else {
 		      this.attributes.sec -= 1;   
 		    }
 		    this.change();

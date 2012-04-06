@@ -7,18 +7,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png">
+	
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script src="js/prefixfree.min.js"></script>
   </head>
 
   <body>
@@ -31,15 +34,7 @@
           <div class="data-row">
             <div class="control-group js_setting_element">
               <label>Pomodoro Time (mins): </label>
-              <select rel="PomodoroTime" class="js_time_setting">
-                  <option>20</option>
-                  <option>25</option>
-                  <option>30</option>
-                  <option>35</option>
-                  <option>40</option>
-                  <option>50</option>
-                  <option>55</option>
-                  <option>60</option>
+              <select tabindex=0 id="PomodoroTime" rel="long_range" class="js_time_setting">
               </select>
               <span class="js_save_message hide help-inline"><i class="icon-ok-circle"></i> Saved</span>
             </div>
@@ -47,20 +42,13 @@
           <div class="data-row">
             <div class="control-group js_setting_element">
               <label>Rest Time (mins): </label>
-              <select rel="ShortRestTime" class="js_time_setting">
-                  <option>10</option>
-                  <option>15</option>
-                  <option>20</option>
-                  <option>25</option>
-                  <option>30</option>
-                  <option>35</option>
-                  <option>40</option>
-                  <option>50</option>
-                  <option>55</option>
-                  <option>60</option>
+              <select tabindex=1 id="ShortRestTime" rel="short_range" class="js_time_setting">
               </select>
               <span class="js_save_message hide help-inline"><i class="icon-ok-circle"></i> Saved</span>
             </div>
+          </div>
+          <div class="data-row">
+            <button id="AllowNotifications">Allow Webkit Notifications</button>
           </div>
       </div>
       
@@ -98,10 +86,10 @@
             <h1>Digital Pomodoro</h2>
             <br />
             <p>
-              The Pomodoro Technique® is a way to get the most out of time management. Turn time into a valuable ally to accomplish what we want to do and chart continuous improvement in the way we do it.
+              The Pomodoro Technique&reg; is a way to get the most out of time management. Turn time into a valuable ally to accomplish what we want to do and chart continuous improvement in the way we do it.
             </p>
             <p>
-              Francesco Cirillo created the Pomodoro Technique® in the 1980s. It is now practiced by professional teams and individuals around the world.
+              Francesco Cirillo created the Pomodoro Technique&reg; in the 1980s. It is now practiced by professional teams and individuals around the world.
             </p>
             <p>
               But even better than that, this application encorporates a task list just to make your working life that bit more productive.
@@ -115,9 +103,87 @@
         </div>
         <!-- start hero -->
         <!-- start tutorial -->
-        <div id="js_tutorial" class="hide span10" style="background-color:#CCC;height:400px;">
-          <h1>Tutorial video here</h1>
-        </div>
+        <div id="js_tutorial" class="hide">		
+			<div id="wrapper_container">					
+				<div id="wrapper_image_panel" >							
+						<div class="image_panel image_enter_task"></div>		
+						<div class="image_panel image_task_added"></div>
+						<div class="image_panel image_task_added_two"></div>
+						<div class="image_panel image_task_added_three"></div>			
+						<div class="image_panel image_timer_one"></div>	
+						<div class="image_panel image_timer_two"></div>	
+						<div class="image_panel image_timer_three"></div>	
+						<div class="image_panel image_timer_four"></div>	
+						<div class="image_panel image_timer_five"></div>		
+						<div class="image_panel image_edit_task"></div>
+						<div class="image_panel image_complete_task"></div>
+						<div class="image_panel image_delete_task"></div>	
+						<div class="image_panel image_end"></div>								
+				</div>
+				<div class="wrapper_bubble enter_task">
+					  <span>Enter task and hit Enter</span>
+					  <div class="bubble_arrow_border arrow_top_border"></div>
+					  <div class="bubble_arrow arrow_top"></div>
+				</div>
+
+				<div class="wrapper_bubble task_added">
+					  <span>task added and the total updated</span>
+					  <div class="bubble_arrow_border arrow_right_border"></div>
+					  <div class="bubble_arrow arrow_right"></div>
+				</div>	
+
+			<div class="wrapper_bubble more_task_added">
+					  <span>add as many tasks as you wish</span>
+					  <div class="bubble_arrow_border arrow_right_border"></div>
+					  <div class="bubble_arrow arrow_right"></div>
+				</div>						
+				
+				<div class="wrapper_bubble new_task_totals">
+					  <span>Totals updated</span>
+					  <div class="bubble_arrow_border arrow_left_border"></div>
+					  <div class="bubble_arrow arrow_left"></div>
+				</div>	
+				
+				<div class="wrapper_bubble start_timer">
+					  <span>click counter to start timer</span>
+					  <div class="bubble_arrow_border arrow_left_border"></div>
+					  <div class="bubble_arrow arrow_left"></div>
+				</div>
+
+				
+				<div class="wrapper_bubble timer_instructions">
+					  <span>You can control the timer in the following ways</span><br />
+					  <span><strong>SINGLE CLICK:</strong> Start and pause the timer</span><br />
+					  <span><strong>DOUBLE CLICK:</strong> Reset timer to 25:00</span>
+					  <div class="bubble_arrow_border arrow_left_border"></div>
+					  <div class="bubble_arrow arrow_left"></div>
+				</div>
+				
+				<div class="wrapper_bubble edit_task">
+					  <span>edit a task by double clicking on it</span>
+					  <div class="bubble_arrow_border arrow_top_border"></div>
+					  <div class="bubble_arrow arrow_top"></div>
+				</div>
+
+				<div class="wrapper_bubble complete_task">
+					  <span>tick to complete task</span>
+					  <div class="bubble_arrow_border arrow_top_border"></div>
+					  <div class="bubble_arrow arrow_top"></div>
+				</div>
+
+				<div class="wrapper_bubble delete_task">
+					  <span>click to delete task</span>
+					  <div class="bubble_arrow_border arrow_top_border"></div>
+					  <div class="bubble_arrow arrow_top"></div>
+				</div>					
+				
+				<div id="player_controls">
+					<div id="start_tasks"><a href="#">Start creating tasks</a></div>
+					<div id="replay_video"><a href="#">Replay animation</a></div>									
+				</div>
+				
+			</div>
+		 </div>
         <!-- -->
       </div>
       <!-- end Home -->
@@ -133,21 +199,6 @@
                 <div class="input task-holder">
                     <input id="task" class="xlarge taskInput" type="text" placeholder="Enter your task here and press enter." />
                 </div>
-                <div class="totalArea">
-                   <span id="total"></span>
-                   <span class="offset3">
-                     <div class="btn-group task_type">
-                       <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-                         All
-                         <span class="caret"></span>
-                       </a>
-                       <ul class="dropdown-menu">
-                         <li><a href="#">In Progress</a></li>
-                         <li><a href="#">Complete</a></li>
-                       </ul>
-                     </div>
-                   </span>
-                </div>
             </div>
           </div>
           
@@ -161,11 +212,25 @@
         
         <div class="row">
           <div class="span6 offset1">
+			<div class="totalArea">
+				 <span id="total"></span>
+				 <div class="btn-group task_type">
+				   <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+					 All
+					 <span class="caret"></span>
+				   </a>
+				   <ul class="dropdown-menu">
+					 <li><a href="#">In Progress</a></li>
+					 <li><a href="#">Complete</a></li>
+				   </ul>
+				 </div>
+			</div>
               <div id="js_noTasks" class="alert alert-info">
                  <h3>You have no Tasks!</h3><br />
                  <p>If you have completed them all Well done.</p>
                  <p>If not, what are you waiting for? enter some above and start organising yourself!.</p>
               </div>
+
               <table class="table table-striped" id="todo-list">
              
               </table>
@@ -201,7 +266,8 @@
     </div> <!-- /container -->    
     <hr>
     <footer>
-      <p class="span4 offset1">Digital Pomodoro 2012 - Written by @Mark_Kellett</p> 
+      <p>Digital Pomodoro 2012 - Written by <a href="http://www.twitter.com/Mark_Kellett" title="Mark Kellett" target="_blank">@Mark_Kellett</a> & 
+	   <a href="http://www.twitter.com/loveforweb" title="Jag Kumar" target="_blank">@loveforweb</a></p> 
     </footer>
     <!-- Le javascript
     ================================================== -->
@@ -254,7 +320,7 @@
             <input class="todo todo-input" id="edit-todo" type="text" value="${attributes.name}" />
           </div>
         </td>
-        <td class="removeArea"><i class="icon-remove-sign todo-destroy"></i></td>
+        <td class="removeArea"><div class="icon-remove-sign todo-destroy"></div></td>
     </script>
   </body>
 </html>
