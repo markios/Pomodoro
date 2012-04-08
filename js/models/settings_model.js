@@ -6,7 +6,8 @@ var models = APP.namespace('APP.models');
 		defaults: function() {
 	      return {
 	        pomodoro_time:  25,
-	        short_rest_time: 10
+	        short_rest_time: 10,
+	        notifications : false
 	      };
 	    }
 	});

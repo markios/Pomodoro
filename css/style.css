@@ -38,11 +38,13 @@
 	.icon-remove-sign { margin-top: 4px;  -webkit-transition-property:opacity; -webkit-transition-duration:500ms; transition-property:opacity; transition-duration:500ms; cursor:pointer;  }
 	.icon-remove-sign:hover { opacity:0.4;}
 
-	.timer-holder {  }
+	.timer-holder { position:relative; }
 	.timer-holder .time { font-size:60px;margin:0 0 20px 20px;cursor:pointer;}
 	.timer-holder .time:hover { }
 	.title { color:#e5e1e1;position:relative;top:30px;}
 	.taskInput { width:98%;height:40px;font-size:18pt; line-height: 25px;}
+
+	.fullScreen {position:absolute;top:5px;display:block;right:5px;}
 
 	#todo-list { font-size:14px;}
 	#todo-list .done { text-decoration:line-through;}

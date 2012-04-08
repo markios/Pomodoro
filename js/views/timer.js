@@ -23,8 +23,10 @@
             this.el.html(this._currentPomodoro.getTime());
 		},
         _onPomodoroComplete : function(){
+            if(APP.models.Settings.getSettings().notifications){
+                APP.notification.show();    
+            }
             
-            notification.show();
             this._playBuzzer();
         },
         _playBuzzer : function(){
@@ -39,9 +41,18 @@
             this._currentPomodoro.bind('change', $.proxy(this.render, this));
             this._currentPomodoro.bind('done', $.proxy(this._onPomodoroComplete, this));
         },
+        _fullScreen : function(event){
+            event.preventDefault();
+            // open window
+
+            // stop own display
+
+            // bind close event
+        },
         events : {
 	        "click .time" : "activate",
-    	    "dblclick .time" : "reset"
+    	    "dblclick .time" : "reset",
+            "click #js_fullscreen" : "_fullScreen"
     	},
         activate : function() {
             this._currentPomodoro.continue();

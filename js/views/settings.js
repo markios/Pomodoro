@@ -25,6 +25,9 @@
             window.webkitNotifications.requestPermission(function(){
               self._allowNotifications.attr('DISABLED', true); 
               APP.createNotification();
+              var settings = APP.models.Settings.getSettings();
+              settings.notifications = true;
+              settings.save();
             });
          });   
       }
