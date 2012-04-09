@@ -19,7 +19,7 @@ var models = APP.namespace('APP.models');
 	    // store the Todos's
 	    localStorage : new Store("settings"),
 	    
-	    _updateTimeFor : function(attribute, time){
+	    _updateSettingFor : function(attribute, time){
     		var appSetting = this.models[0];
 	    	appSetting.attributes[attribute] = time;
 	    	appSetting.save();
@@ -32,7 +32,7 @@ var models = APP.namespace('APP.models');
 	       return this.models[0].attributes;
 	    },
 	    setPomodoroTime : function(withTime){
-	    	this._updateTimeFor("pomodoro_time", withTime);
+	    	this._updateSettingFor("pomodoro_time", withTime);
 		},
 		getPomodoroTime : function(){
 			return this._getSetting("pomodoro_time");
@@ -41,7 +41,13 @@ var models = APP.namespace('APP.models');
 			return this._getSetting("short_rest_time");
 		},
 	    setShortRestTime : function(withTime){
-	    	this._updateTimeFor("short_rest_time", withTime);
+	    	this._updateSettingFor("short_rest_time", withTime);
+	    },
+	    getNotifications : function(){
+	    	this._getSetting('notifications');
+	    },
+	    setNotifications : function(canNotify){
+	    	this._updateSettingFor('notifications', canNotify);
 	    }
 	});
 

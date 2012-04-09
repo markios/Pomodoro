@@ -24,11 +24,15 @@
   }
 
   application.createNotification = function(){
-      APP.settings.notification = window.webkitNotifications.createNotification(
+      APP.notification = window.webkitNotifications.createNotification(
                     'images/clock.png', 
                     'Pomodoro Complete', 
                     'Your pomodoro is complete');
   };
+
+  application.showNotification = function(){
+      APP.notification.show();
+  }
 
 	application.init = function(){
 		

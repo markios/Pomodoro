@@ -3,9 +3,28 @@
 	var timer = APP.namespace('APP.timer');
 	
 	timer.view = Backbone.View.extend({
-		initialize: function() {
-            this.el = $(this.el).find('.time');
+		_setModal : function(){
+            this._timerModal = new APP.timer.modalView({el : 
+                                    this.el.find('#fullScreenTimerModal')});
+
+            var self = this;
+            this._timerModal.bind('close', function(){
+                self.modalOn = false;
+            });
+        },
+        events : {
+            "click .time" : "activate",
+            "dblclick .time" : "reset",
+            "click #js_fullscreen" : "_fullScreen"
+        },
+        initialize: function() {
+            
+            this.el = $(this.el)
+            this._timeArea = this.el.find('.time');
+            this._fullscreen = this.el.find('#js_fullscreen');
             this._createPomodoro();
+            this._setModal();
+            
             // create shortcut stuff
             var self = this;    
             $(document).on('keypress', function(e){
@@ -20,14 +39,17 @@
             this.render();
         },
         render : function(){
-            this.el.html(this._currentPomodoro.getTime());
+            if(this.modalOn) return;
+
+            this._timeArea.html(this._currentPomodoro.getTime());
 		},
         _onPomodoroComplete : function(){
-            if(APP.models.Settings.getSettings().notifications){
-                APP.notification.show();    
+            if(APP.models.Settings.getNotifications()){
+                APP.showNotification();
             }
             
             this._playBuzzer();
+
         },
         _playBuzzer : function(){
             var buzz = new Audio('sounds/buzzer.wav');
@@ -44,22 +66,19 @@
         _fullScreen : function(event){
             event.preventDefault();
             // open window
-
+            this._timerModal.render(this._currentPomodoro);
             // stop own display
-
-            // bind close event
+            this.modalOn = true;
         },
-        events : {
-	        "click .time" : "activate",
-    	    "dblclick .time" : "reset",
-            "click #js_fullscreen" : "_fullScreen"
-    	},
+        
         activate : function() {
+            this._fullscreen.toggleClass('hide');
             this._currentPomodoro.continue();
         },
         reset : function(){
            this._currentPomodoro.destroy();
            this._createPomodoro();
+           this._fullscreen.addClass('hide');
            this.render();
            this.el.addClass('reset');
         }

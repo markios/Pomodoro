@@ -58,6 +58,7 @@
       </div>
     </div>
     <!-- end settings dialog -->
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container offset1">
@@ -205,19 +206,33 @@
           <!-- TIMER -->
           <div class="span3 well timer-holder">
             <i class="icon-time"></i>
-            <a href="#" class="fullScreen">
-              <i id="js_fullscreen" class="icon-resize-full"></i>
+            <a id="js_fullscreen" href="#" class="fullScreen hide">
+              <i class="icon-resize-full"></i>
             </a>
             <div class="time"></div>
+
+            <!-- TIMER MODAL -->
+            <div id="fullScreenTimerModal" class="modal hide">
+              
+              <div class="modal-body">
+                <div id="js_time_area" class="full_screen_time"></div>
+              </div>
+              <!-- dialog buttons -->
+              <div class="modal-footer">
+                  <a class="btn primary">Ok</a>
+              </div>
+            </div>
+            <!-- END OF TIMER MODAL -->
+
           </div>
-        
+          
         </div>
-        
+        <!-- END OF FIRST ROW -->
         <div class="row">
           <div class="span6 offset1">
-			<div class="totalArea">
-				 <span id="total"></span>
-				 <div class="btn-group task_type">
+			    <div class="totalArea">
+				  <span id="total"></span>
+				  <div class="btn-group task_type">
 				   <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
 					 All
 					 <span class="caret"></span>
@@ -304,6 +319,7 @@
     <script src="js/views/settings.js" type="text/javascript"></script>
     <script src="js/views/statistics.js" type="text/javascript"></script>
     <script src="js/views/timer.js" type="text/javascript"></script>
+    <script src="js/views/fullscreen.js" type="text/javascript"></script>
     <script src="js/views/application.js" type="text/javascript"></script>
 
     <script type="text/javascript">

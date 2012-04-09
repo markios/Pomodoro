@@ -44,7 +44,7 @@
 	.title { color:#e5e1e1;position:relative;top:30px;}
 	.taskInput { width:98%;height:40px;font-size:18pt; line-height: 25px;}
 
-	.fullScreen {position:absolute;top:5px;display:block;right:5px;}
+	.fullScreen {position:absolute;top:5px;right:5px;}
 
 	#todo-list { font-size:14px;}
 	#todo-list .done { text-decoration:line-through;}
