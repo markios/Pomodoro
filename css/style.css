@@ -22,9 +22,23 @@
 	.data-row .pulse {   animation-name: pulse;   animation-duration: 0.5s;  animation-iteration-count: 2; 
 										-webkit-animation-name: pulse;  -webkit-animation-duration: 0.5s;   -webkit-animation-iteration-count: 2; }
 	  
-	  .reset { animation-name: flasher;  animation-duration: 0.5s;  animation-iteration-count: 3; 
-		            -webkit-animation-name: flasher;   -webkit-animation-duration: 0.5s;  -webkit-animation-iteration-count: 3;  }
+	  .reset { animation-name: flasher;  
+	  		   animation-duration: 0.5s;  
+	  		   animation-iteration-count: 3; 
+              -webkit-animation-name: flasher;   
+              -webkit-animation-duration: 0.5s;  
+              -webkit-animation-iteration-count: 3;  
+          }
 	  
+	  .slideOut { animation-name: slideOut;
+	  			  animation-duration: 0.5s;  
+	  			  animation-iteration-count: 1; 
+		            -webkit-animation-name: slideOut;   
+		            -webkit-animation-duration: 0.5s;  
+		            -webkit-animation-fill-mode: forwards;
+		            -webkit-animation-iteration-count: 1;  
+		        }
+
 	.task-holder { }
 	.task-holder .task {  }
 
@@ -38,13 +52,15 @@
 	.icon-remove-sign { margin-top: 4px;  -webkit-transition-property:opacity; -webkit-transition-duration:500ms; transition-property:opacity; transition-duration:500ms; cursor:pointer;  }
 	.icon-remove-sign:hover { opacity:0.4;}
 
-	.timer-holder { position:relative; }
-	.timer-holder .time { font-size:60px;margin:0 0 20px 20px;cursor:pointer;}
+	.timer-holder { position:relative;overflow:hidden;height:60px;}
+	.timer-holder .time { font-size:60px;margin:0 0 20px 20px;cursor:pointer;position:relative;}
 	.timer-holder .time:hover { }
 	.title { color:#e5e1e1;position:relative;top:30px;}
 	.taskInput { width:98%;height:40px;font-size:18pt; line-height: 25px;}
 
 	.fullScreen {position:absolute;top:5px;right:5px;}
+
+	.full_screen_time {height:110px;width:100%;text-align:center;padding-top:100px;font-size:100px;}
 
 	#todo-list { font-size:14px;}
 	#todo-list .done { text-decoration:line-through;}
@@ -52,6 +68,9 @@
 	#todo-list .removeArea { width:15px;}
 
 	.totalArea { margin: 0px 0 0 3px; height: 54px;} 
+
+	.restOptions { left:60px;top:35px;position:absolute;width:220px;}
+	.rest_time {color:#B94A48;}
 	  
 	 /* === Task Page - Keyframes === */   
 	@keyframes pulse {
@@ -73,6 +92,14 @@
 	@-webkit-keyframes flasher  {  
 		from {color: black;} 
 		to {color: blue;} 
+	}
+
+	@keyframes slideOut   { 
+		to {left: 300px;} 
+	}
+
+	@-webkit-keyframes slideOut  {  
+		to {left: 300px;} 
 	}
 
 	/* ========== HOME INTRO PAGE ========== */

@@ -9,9 +9,15 @@
       	},
       	closeModal : function(event){
   			event.preventDefault();
-  			this._currentPomodoro.unbind('change', this._callBack);
-  			this.el.modal('hide');
+  			
+  			// unbind
+			this._currentPomodoro.unbind('change', this._changeCallBack);
+			this._currentPomodoro.unbind('done', this._completeCallBack);	
 
+  			this._close();
+  		},
+  		_close : function(){
+			this.el.modal('hide');
   			// let parent know @closing
   			this.trigger('close');
   		},
@@ -26,8 +32,10 @@
 			this._currentPomodoro = pomodoro;
 
 			// set the callback this way so that it can be unbound
-			this._callBack = $.proxy(this._setTime, this);
-			this._currentPomodoro.bind('change', this._callBack);
+			this._changeCallBack = $.proxy(this._setTime, this);
+			this._currentPomodoro.bind('change', this._changeCallBack);
+			this._completeCallBack = $.proxy(this._close, this);
+			this._currentPomodoro.bind('done', this._completeCallBack);
 
 			this.el.modal({
 		      "backdrop"  : "static",
