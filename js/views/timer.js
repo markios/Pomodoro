@@ -68,7 +68,7 @@
         _takeARest : function(){
             this._isResting = true;
             this._currentPomodoro.destroy();
-            this._createPomodoro('short_rest_time');
+            this._createPomodoro('short_rest_time', false);
             this._timeArea.addClass('rest_time');
             this.render();
 
@@ -78,11 +78,11 @@
             var buzz = new Audio('sounds/buzzer.wav');
             buzz.play();
         },
-        _createPomodoro : function(forTime){
+        _createPomodoro : function(forTime, isPomodoro){
             var min = APP.models.Settings.getSettings()[forTime],
                 self = this;
 
-            this._currentPomodoro = APP.models.Pomodoros.create({min : min});
+            this._currentPomodoro = APP.models.Pomodoros.create({min : min, isPomodoro : isPomodoro});
             this._currentPomodoro.bind('change', $.proxy(this.render, this));
             this._currentPomodoro.bind('done', $.proxy(this._onPomodoroComplete, this));
         },
@@ -100,7 +100,7 @@
         },
         reset : function(){
            this._currentPomodoro.destroy();
-           this._createPomodoro('pomodoro_time');
+           this._createPomodoro('pomodoro_time', true);
            
            this._fullscreen.addClass('hide');
            this._timeArea.removeClass('rest_time');

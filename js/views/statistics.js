@@ -28,7 +28,19 @@
 			    that[element].el = $clone;
 			});
 		},
+		_updatePomodoroStats : function(pomodoro){
+			
+		},
+		_bindPomodoroComplete : function(){
+			this._currentPomodoro = APP.models.Pomodoros.at(0);
+          	this._bindPomodoroComplete(); 
+			this._currentPomodoro.on('done', $.proxy(this._updatePomodoroStats, this));
+		},
 		initialize: function() {
+		   var pomodoros = APP.models.Pomodoros,
+		   	   self = this;
+
+		   pomodoros.bind('add', $.proxy(this._bindPomodoroComplete, this);
 
 		   // add task elements
 		   this._totalTasks = { el : $('#total_tasks', this.el) };
