@@ -9,7 +9,8 @@
      	    settingsModal.render();
      }
 
-     if(window.webkitNotifications && window.webkitNotifications.checkPermission() === 0){
+     if(window.webkitNotifications && 
+          window.webkitNotifications.checkPermission() === 0){
         application.createNotification();          
      }
 
@@ -103,6 +104,9 @@
 	    	this._currentPomodoro.bind('change', function(event){
 	    		self._setDocumentTitle(self._currentPomodoro.getTime());
 	    	});
+        this._currentPomodoro.bind('done', function(){
+          self._setDocumentTitle(self._defaultTitle);
+        });
 	    },
 	    _setDocumentTitle : function(title){
     		document.title = title;
