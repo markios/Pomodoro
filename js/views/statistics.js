@@ -28,21 +28,27 @@
 			    that[element].el = $clone;
 			});
 		},
-		_updatePomodoroStats : function(pomodoro){
+		_updatePomodoroStats : function(){
 			
-		},
-		_bindPomodoroComplete : function(){
-			this._currentPomodoro = APP.models.Pomodoros.at(0);
-          	this._bindPomodoroComplete(); 
-			this._currentPomodoro.on('done', $.proxy(this._updatePomodoroStats, this));
-		},
-		initialize: function() {
-		   var pomodoros = APP.models.Pomodoros,
-		   	   self = this;
 
-		   pomodoros.bind('add', $.proxy(this._bindPomodoroComplete, this);
+		},
+		_initPomodotoStats : function(){
+			var self = this;
 
-		   // add task elements
+			this.pomodoros = APP.models.Pomodoros;
+			this._currentPomodoro = this.pomodoros.current();
+
+			this._currentPomodoro.bind('done', $.proxy(this._updatePomodoroStats, this));
+
+			this.pomodoros.bind('add', function(){
+				self._currentPomodoro = pomodoros.current();
+			});
+
+			this._updatePomodoroStats();
+		},
+		_initTaskStats : function(){
+		   var self = this;
+			// add task elements
 		   this._totalTasks = { el : $('#total_tasks', this.el) };
 		   this._totalTasks.getData = function(){
 		   	   return window.APP.models.Todos.length;
@@ -61,19 +67,21 @@
                var result = window.APP.models.Todos.remaining().length || 0;
                return result;
 		   };
-		   this._tasksElements.push("_inProgressTasks");		   		   
+		   this._tasksElements.push("_inProgressTasks");	
 
-		   // add timer elements
-
+		   // finally bing task events to update internal models
 		   var todos = APP.models.Todos;
 		   todos.bind('add', this._updateTaskStats, this);
 		   todos.bind('change', this._updateTaskStats, this);
 		   todos.bind('remove', this._updateTaskStats, this);
+
+		},
+		initialize: function() {
+		   this._initPomodotoStats();
+		   this._initTaskStats();		   
 		},
 		render : function(){
 			this._updateTaskStats();
 		}
 	});
-
-
 })(jQuery);

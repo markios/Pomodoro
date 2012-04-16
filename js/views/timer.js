@@ -99,9 +99,11 @@
             this._currentPomodoro.continue();
         },
         reset : function(){
-           this._currentPomodoro.destroy();
-           this._createPomodoro('pomodoro_time', true);
+           if(this._currentPomodoro.attributes.done === false){
+              this._currentPomodoro.destroy();   
+           }
            
+           this._createPomodoro('pomodoro_time', true);
            this._fullscreen.addClass('hide');
            this._timeArea.removeClass('rest_time');
            

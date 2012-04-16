@@ -36,10 +36,14 @@
 	    _padTime : function (time) {
     		return (time < 10) ? '0' + time  : time;
   		},
+  		_finish : function(){
+  			this._stop();
+		    this.attributes.done = true;
+		    this.trigger("done");
+  		},
 	    _countdown : function(){
 		    if(this.attributes.min === 0 && this.attributes.sec === 0) {
-		      this._stop();
-		      this.trigger("done");
+		       this._finish();
 		    } 
 		    else if(this.attributes.sec == 0) {
 		      this.attributes.min -= 1;
@@ -68,9 +72,8 @@
 	    },
 
 	    current: function(){
-	      return this.filter(function(pomodoro){ return pomodoro.get('done') == false; });
+	      return this.filter(function(pomodoro){ return pomodoro.get('done') == false; })[0];
 	    }
-	    
 	});
 
 	models.Pomodoros = new PomodoroCollection();
