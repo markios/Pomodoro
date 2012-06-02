@@ -235,12 +235,12 @@
 			    <div class="totalArea">
 				  <span id="total"></span>
 				  <div class="btn-group task_type">
-				   <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+				   <a id="js_filter" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
 					 All
 					 <span class="caret"></span>
 				   </a>
 				   <ul class="dropdown-menu">
-					 <li><a href="#">In Progress</a></li>
+					 <li><a id="InProgress">In Progress</a></li>
 					 <li><a href="#">Complete</a></li>
 				   </ul>
 				 </div>
@@ -259,11 +259,11 @@
           <div id="statistics" class="span3 well">
             <i class="icon-pencil"></i>
             <span class="header"><strong>Statistics</strong></span>
-            <div id="Pomodoro_today" class="data-row">
+            <div id="pomodoros_today" class="data-row">
               <span class="label label-info data">0</span>
               <span class="data-text">Pomodoro's Completed Today</span>
             </div>
-            <div class="data-row">
+            <div id="total_pomodoros" class="data-row">
               <span class="label label-info data">0</span>
               <span class="data-text">Total Pomodoro's</span>
             </div>
@@ -330,6 +330,13 @@
     </script>
 
     <!-- Templates -->
+    <script type="text/x-jquery-tmpl" id="statTemplate">
+      <div class="data-row">
+          <span class="label label-info data">{amount}</span>
+          <span class="data-text">{title}</span>
+      </div>
+    </script>
+
     <script type="text/x-jquery-tmpl" id="todoTemplate">
         <td class="checkArea"><input class="check" {{if attributes.done }} checked {{/if}} type="checkbox" /></td>
         <td>

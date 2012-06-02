@@ -2,6 +2,17 @@
 
 	var statistics = APP.namespace('APP.statistics');
 
+	var stat_view = Backbone.View.extend({
+		_template : '#statTemplate', 
+		initialize : function(){
+			// bind events
+			
+		},
+		render : function(){
+
+		}
+	});
+
 	statistics.view = Backbone.View.extend({
 		_tasksElements : [],
 		_updateTaskStats : function(){
@@ -36,12 +47,16 @@
 			var self = this;
 
 			this.pomodoros = APP.models.Pomodoros;
+
+			this._totalPomodoros = { el : $('#total_pomodoros', this.el) };
+			this._totalPomodorosToday = { el : $('#pomodoros_today', this.el) };
+
 			this._currentPomodoro = this.pomodoros.current();
 
 			this._currentPomodoro.bind('done', $.proxy(this._updatePomodoroStats, this));
 
 			this.pomodoros.bind('add', function(){
-				self._currentPomodoro = pomodoros.current();
+				self._currentPomodoro = self.pomodoros.current();
 			});
 
 			this._updatePomodoroStats();
@@ -69,7 +84,7 @@
 		   };
 		   this._tasksElements.push("_inProgressTasks");	
 
-		   // finally bing task events to update internal models
+		   // finally bind task events to update internal models
 		   var todos = APP.models.Todos;
 		   todos.bind('add', this._updateTaskStats, this);
 		   todos.bind('change', this._updateTaskStats, this);
@@ -78,7 +93,8 @@
 		},
 		initialize: function() {
 		   this._initPomodotoStats();
-		   this._initTaskStats();		   
+		   this._initTaskStats();
+		   var s = new stat_view({name : 'pomodoro_today'});		   
 		},
 		render : function(){
 			this._updateTaskStats();

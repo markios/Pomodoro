@@ -13,7 +13,8 @@
 	      "click .check"              : "toggleDone",
 	      "dblclick div.todo-text"    : "edit",
 	      "click .todo-destroy"   	  : "clear",
-	      "keypress .todo-input"      : "updateOnEnter"
+	      "keypress .todo-input"      : "updateOnEnter",
+	      "click #InProgress"         : "filterTask"
 	    },
 
 	    // The TodosView listens for changes to its model, re-rendering.
@@ -30,6 +31,10 @@
 		  this.setEditArea();
 		  this.displayArea =  this.el.find('.display');
 		  return this;
+	    },
+
+	    filterTask : function(){
+	    	alert('changed');
 	    },
 
 	    // To avoid XSS (not that it would be harmful in this particular app),
