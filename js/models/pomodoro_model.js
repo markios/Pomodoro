@@ -40,6 +40,7 @@
   			this._stop();
 		    this.attributes.done = true;
 		    this.trigger("done");
+		    this.save();
   		},
 	    _countdown : function(){
 		    if(this.attributes.min === 0 && this.attributes.sec === 0) {

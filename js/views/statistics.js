@@ -3,13 +3,29 @@
 	var statistics = APP.namespace('APP.statistics');
 
 	var stat_view = Backbone.View.extend({
-		_template : '#statTemplate', 
 		initialize : function(){
-			// bind events
+			var self = this;
+			this.stat_area = this.el.find('.js_stat');
 			
+			APP.models.Pomodoros.bind('done', function(){
+				self.options.data = APP.models.Pomodoros.done().length;
+				self.render();
+			});
+
+			this.render();	
 		},
 		render : function(){
 
+			// clone el for css 3 animation to work
+			var $clone = this.stat_area
+							 .clone()
+							 .html(this.options.data);
+
+		    this.stat_area
+		    	.before($clone)
+		    	.remove();
+
+			this.stat_area = $clone;		    
 		}
 	});
 
@@ -72,14 +88,14 @@
 
 		   this._completeTasks = { el : $('#complete_tasks', this.el) };
 		   this._completeTasks.getData = function(){
-               var result = window.APP.models.Todos.done().length || 0;
+               var result = window.APP.models.Todos.done().length;
                return result;
 		   }; 
 		   this._tasksElements.push("_completeTasks");		   
 
 		   this._inProgressTasks = { el : $('#inProgress_tasks', this.el) };
 		   this._inProgressTasks.getData = function(){
-               var result = window.APP.models.Todos.remaining().length || 0;
+               var result = window.APP.models.Todos.remaining().length;
                return result;
 		   };
 		   this._tasksElements.push("_inProgressTasks");	
@@ -94,7 +110,13 @@
 		initialize: function() {
 		   this._initPomodotoStats();
 		   this._initTaskStats();
-		   var s = new stat_view({name : 'pomodoro_today'});		   
+		  
+		   var pomodoros_today = new stat_view({
+		   	 el : $('#pomodoros_today'),
+		   	 name : 'pomodoro_today', 
+		   	 data : APP.models.Pomodoros.done().length,
+		   	 targetEvent : 'done'
+		   });		   
 		},
 		render : function(){
 			this._updateTaskStats();
